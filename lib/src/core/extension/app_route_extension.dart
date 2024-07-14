@@ -9,8 +9,10 @@ extension AppPageExtension on AppPage {
         return '/startup';
       case AppPage.onboarding:
         return '/onboarding';
+      case AppPage.login:
+        return '/login';
       default:
-        return '/startup';
+        return '/login';
     }
   }
 
@@ -24,8 +26,10 @@ extension AppPageExtension on AppPage {
         return 'STARTUP';
       case AppPage.onboarding:
         return 'ONBOARDING';
+      case AppPage.login:
+        return 'LOGIN';
       default:
-        return 'STARTUP';
+        return 'LOGIN';
     }
   }
 
@@ -36,8 +40,10 @@ extension AppPageExtension on AppPage {
         return 'Startup';
       case AppPage.onboarding:
         return 'Onboarding';
+      case AppPage.login:
+        return 'Login';
       default:
-        return 'Startup';
+        return 'Login';
     }
   }
 }

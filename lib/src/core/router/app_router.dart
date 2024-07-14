@@ -1,6 +1,7 @@
 import 'package:fitmetrics/src/core/enums/app_page_enum.dart';
 import 'package:fitmetrics/src/core/extension/app_route_extension.dart';
 import 'package:fitmetrics/src/core/router/not_found_screen.dart';
+import 'package:fitmetrics/src/features/authentication/presentation/screens/login/login_screen.dart';
 import 'package:fitmetrics/src/features/onboarding/presentations/onboarding_screen.dart';
 import 'package:fitmetrics/src/features/onboarding/providers/onboarding_provider.dart';
 import 'package:fitmetrics/src/features/startup/providers/app_startup.dart';
@@ -25,6 +26,7 @@ GoRouter goRouter(GoRouterRef ref) {
   final appStartupState = ref.watch(appStartupProvider);
 
   return GoRouter(
+    initialLocation: AppPage.login.routePath,
     navigatorKey: _rootNavigatorKey,
     debugLogDiagnostics: true,
     redirect: (context, state) {
@@ -69,6 +71,15 @@ GoRouter goRouter(GoRouterRef ref) {
           transitionDuration: transitionDuration,
         ),
       ),
+      GoRoute(
+        path: AppPage.login.routePath,
+        name: AppPage.login.routeName,
+        pageBuilder: (context, state) => const CustomTransitionPage(
+          child: LoginScreen(),
+          transitionsBuilder: _buildFadeTransition,
+          transitionDuration: transitionDuration,
+        ),
+      )
     ],
   );
 }

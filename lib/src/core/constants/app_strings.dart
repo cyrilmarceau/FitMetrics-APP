@@ -18,8 +18,7 @@ class AppStrings {
   static const String signIn = 'Se connecter';
   static const String createAnAccount = 'Créer un compte';
   static const String signInWithGoogle = 'Se connecter avec Google';
-  static const String signInWithEmailPassword =
-      'Se connecter avec email et mot de passe';
+  static const String signInWithEmailPassword = 'Se connecter avec email et mot de passe';
 
   // Sign up Page
   static const String signUp = 'Créer mon compte';
