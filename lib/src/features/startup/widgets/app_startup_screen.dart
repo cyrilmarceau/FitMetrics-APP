@@ -1,4 +1,5 @@
 import 'package:fitmetrics/src/features/startup/providers/app_startup.dart';
+import 'package:fitmetrics/src/features/startup/widgets/app_startup_error_screen.dart';
 import 'package:fitmetrics/src/features/startup/widgets/app_startup_loading_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

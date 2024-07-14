@@ -1,6 +1,8 @@
 import 'package:fitmetrics/src/core/enums/app_page_enum.dart';
 import 'package:fitmetrics/src/core/extension/app_route_extension.dart';
 import 'package:fitmetrics/src/core/router/not_found_screen.dart';
+import 'package:fitmetrics/src/features/onboarding/presentations/onboarding_screen.dart';
+import 'package:fitmetrics/src/features/onboarding/providers/onboarding_provider.dart';
 import 'package:fitmetrics/src/features/startup/providers/app_startup.dart';
 import 'package:fitmetrics/src/features/startup/widgets/app_startup_screen.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +31,18 @@ GoRouter goRouter(GoRouterRef ref) {
       if (appStartupState.isLoading || appStartupState.hasError) {
         return AppPage.startup.routePath;
       }
+
+      final onboardingRepository = ref.read(onboardingRepositoryProvider).requireValue;
+      final didCompleteOnboarding = onboardingRepository.isOnboardingComplete();
+
+      final path = state.uri.path;
+
+      if (!didCompleteOnboarding) {
+        if (path != AppPage.onboarding.routePath) {
+          return AppPage.onboarding.routePath;
+        }
+        return null;
+      }
       return null;
     },
     errorPageBuilder: (context, state) => const NoTransitionPage(
@@ -46,6 +60,23 @@ GoRouter goRouter(GoRouterRef ref) {
           ),
         ),
       ),
+      GoRoute(
+        path: AppPage.onboarding.routePath,
+        name: AppPage.onboarding.routeName,
+        pageBuilder: (context, state) => const CustomTransitionPage(
+          child: OnBoardingScreen(),
+          transitionsBuilder: _buildFadeTransition,
+          transitionDuration: transitionDuration,
+        ),
+      ),
     ],
   );
 }
+
+Widget _buildFadeTransition(
+  BuildContext context,
+  Animation<double> animation,
+  Animation<double> secondaryAnimation,
+  Widget child,
+) =>
+    FadeTransition(opacity: animation, child: child);

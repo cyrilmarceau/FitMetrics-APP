@@ -7,6 +7,8 @@ extension AppPageExtension on AppPage {
     switch (this) {
       case AppPage.startup:
         return '/startup';
+      case AppPage.onboarding:
+        return '/onboarding';
       default:
         return '/startup';
     }
@@ -20,6 +22,8 @@ extension AppPageExtension on AppPage {
     switch (this) {
       case AppPage.startup:
         return 'STARTUP';
+      case AppPage.onboarding:
+        return 'ONBOARDING';
       default:
         return 'STARTUP';
     }
@@ -30,6 +34,8 @@ extension AppPageExtension on AppPage {
     switch (this) {
       case AppPage.startup:
         return 'Startup';
+      case AppPage.onboarding:
+        return 'Onboarding';
       default:
         return 'Startup';
     }
