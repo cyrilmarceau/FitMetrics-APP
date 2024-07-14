@@ -1,3 +1,4 @@
+import 'package:fitmetrics/src/core/router/app_router.dart';
 import 'package:fitmetrics/src/core/theme/theme.dart';
 import 'package:fitmetrics/src/core/theme/util.dart';
 import 'package:flutter/material.dart';
@@ -8,18 +9,16 @@ class FitmetricsApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final goRouter = ref.watch(goRouterProvider);
+
     TextTheme textTheme = createTextTheme(context, "Barlow", "Barlow");
     MaterialTheme theme = MaterialTheme(textTheme);
 
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       theme: theme.light(),
       title: 'Fitmetrics',
-      home: const Scaffold(
-        body: Center(
-          child: Text('Fitmetrics'),
-        ),
-      ),
+      routerConfig: goRouter,
     );
   }
 }
