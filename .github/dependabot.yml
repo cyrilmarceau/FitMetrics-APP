@@ -12,10 +12,3 @@ updates:
           time: '21:00'
           timezone: 'Europe/Paris'
       open-pull-requests-limit: 5
-    - package-ecosystem: 'android'
-      directory: '/android'
-      schedule:
-          interval: weekly
-          time: '21:00'
-          timezone: 'Europe/Paris'
-      open-pull-requests-limit: 5
