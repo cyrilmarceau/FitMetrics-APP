@@ -51,7 +51,11 @@ class AuthRepositoryImpl with LoggingMixin implements AuthRepository {
       } else {
         log.e('[AuthRepositoryImpl] :: login :: statusCode != HttpStatus.ok :: payload.data => ${payload.data}');
 
-        throw LoginFailedException(messages: payload.data['messages']);
+        throw LoginFailedException(
+          messages: payload.data['messages'],
+          statusCode: payload.statusCode,
+          data: null,
+        );
       }
     } on DioException catch (e) {
       log.e('[AuthRepositoryImpl] :: login :: DioException => ${e.toString()}');

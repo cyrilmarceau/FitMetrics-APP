@@ -1,4 +1,5 @@
 import 'package:fitmetrics/src/core/constants/constants.dart';
+import 'package:fitmetrics/src/core/extension/async_ui_extension.dart';
 import 'package:fitmetrics/src/features/authentication/data/models/login_model.dart';
 import 'package:fitmetrics/src/features/authentication/presentation/screens/login/login_controller.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,8 @@ class _LoginFormState extends ConsumerState<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
+    ref.listen(loginControllerProvider, (_, state) => state.showSnackBarOnErrorOrSuccess(context));
+
     return FormBuilder(
       initialValue: const {
         'email': 'a@a.fr',
