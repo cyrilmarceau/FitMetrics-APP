@@ -12,14 +12,14 @@ Dio dio(Ref ref) {
   /// Create interceptors for the Dio client to handle token refresh
   ///
 
-  const baseUrl = 'http://192.168.1.14:8000/api/v1';
+  const baseUrl = 'http://192.168.1.14:8000/api';
 
   dio.options.baseUrl = baseUrl;
   dio.options.connectTimeout = const Duration(seconds: 15);
   dio.options.receiveTimeout = const Duration(seconds: 15);
   dio.options.contentType = Headers.jsonContentType;
   dio.options.followRedirects = true;
-  dio.options.validateStatus = (status) => status! >= 200 && status <= 400;
+  dio.options.validateStatus = (status) => status! >= 200 && status <= 401;
   dio.options.headers = <String, dynamic>{
     'Accept': Headers.jsonContentType,
   };

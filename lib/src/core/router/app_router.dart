@@ -2,6 +2,8 @@ import 'package:fitmetrics/src/core/enums/app_page_enum.dart';
 import 'package:fitmetrics/src/core/extension/app_route_extension.dart';
 import 'package:fitmetrics/src/core/router/not_found_screen.dart';
 import 'package:fitmetrics/src/features/authentication/presentation/screens/login/login_screen.dart';
+import 'package:fitmetrics/src/features/authentication/providers/auth_provider.dart';
+import 'package:fitmetrics/src/features/authentication/providers/auth_state.dart';
 import 'package:fitmetrics/src/features/onboarding/presentations/onboarding_screen.dart';
 import 'package:fitmetrics/src/features/onboarding/providers/onboarding_provider.dart';
 import 'package:fitmetrics/src/features/startup/providers/app_startup.dart';
@@ -45,7 +47,24 @@ GoRouter goRouter(GoRouterRef ref) {
         }
         return null;
       }
-      return null;
+
+      final authState = ref.read(authControllerProvider);
+      final isLoggedIn = authState.asData?.value is Authenticated;
+
+      if (isLoggedIn) {
+        /// User is successfully authenticated when the path is '/login'
+        if (path == AppPage.login.routePath) {
+          return AppPage.home.routePath;
+        } else {
+          return null;
+        }
+      } else {
+        if (path == AppPage.login.routePath || path == AppPage.signup.routePath) {
+          return null;
+        } else {
+          return AppPage.login.routePath;
+        }
+      }
     },
     errorPageBuilder: (context, state) => const NoTransitionPage(
       child: NotFoundScreen(),

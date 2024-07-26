@@ -1,6 +1,6 @@
 import 'package:fitmetrics/src/core/constants/constants.dart';
-import 'package:fitmetrics/src/features/shared/widgets/buttons/button_filled_primary_async.dart';
-import 'package:flutter/foundation.dart';
+import 'package:fitmetrics/src/features/authentication/data/models/login_model.dart';
+import 'package:fitmetrics/src/features/authentication/presentation/screens/login/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -28,7 +28,10 @@ class _LoginFormState extends ConsumerState<LoginForm> {
 
   Future<void> onLogin() async {
     _formKey.currentState?.saveAndValidate();
-    debugPrint(_formKey.currentState?.value.toString());
+    final email = _formKey.currentState?.fields['email']?.value as String;
+    final password = _formKey.currentState?.fields['password']?.value as String;
+
+    ref.read(loginControllerProvider.notifier).login(request: LoginModel(email: email, password: password));
   }
 
   @override
@@ -36,7 +39,7 @@ class _LoginFormState extends ConsumerState<LoginForm> {
     return FormBuilder(
       initialValue: const {
         'email': 'a@a.fr',
-        'password': '12345678',
+        'password': '123456789',
       },
       key: _formKey,
       child: Column(
@@ -63,7 +66,17 @@ class _LoginFormState extends ConsumerState<LoginForm> {
           gapH32,
           FilledButton(
             onPressed: onLogin,
-            child: const Text(AppStrings.signIn),
+            style: ElevatedButton.styleFrom(
+              textStyle: const TextStyle(fontSize: 20),
+            ),
+            child: Text(
+              AppStrings.signIn,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
+            ),
           ),
         ],
       ),

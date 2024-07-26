@@ -41,5 +41,36 @@ final tokenStorageRepositoryProvider =
 
 typedef TokenStorageRepositoryRef
     = AutoDisposeProviderRef<LocalJwtStorageRepositoryImpl>;
+String _$authRepositoryHash() => r'e22991e453d6b7150cd16a9089599e2a6b967ff5';
+
+/// See also [authRepository].
+@ProviderFor(authRepository)
+final authRepositoryProvider = AutoDisposeProvider<AuthRepositoryImpl>.internal(
+  authRepository,
+  name: r'authRepositoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$authRepositoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef AuthRepositoryRef = AutoDisposeProviderRef<AuthRepositoryImpl>;
+String _$authControllerHash() => r'85fcb7727bb2498798b510f48efd0daa2dd02d04';
+
+/// See also [AuthController].
+@ProviderFor(AuthController)
+final authControllerProvider =
+    AsyncNotifierProvider<AuthController, AuthState>.internal(
+  AuthController.new,
+  name: r'authControllerProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$authControllerHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$AuthController = AsyncNotifier<AuthState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

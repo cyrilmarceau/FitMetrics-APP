@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'jwt.dart';
+part of 'token.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
