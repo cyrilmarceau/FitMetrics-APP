@@ -2,6 +2,8 @@ import 'package:fitmetrics/src/core/constants/constants.dart';
 import 'package:fitmetrics/src/core/extension/async_ui_extension.dart';
 import 'package:fitmetrics/src/features/authentication/data/models/login_model.dart';
 import 'package:fitmetrics/src/features/authentication/presentation/screens/login/login_controller.dart';
+import 'package:fitmetrics/src/features/shared/widgets/form/form_password_field.dart';
+import 'package:fitmetrics/src/features/shared/widgets/form/form_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -47,25 +49,9 @@ class _LoginFormState extends ConsumerState<LoginForm> {
       key: _formKey,
       child: Column(
         children: [
-          FormBuilderTextField(
-            name: 'email',
-            validator: FormBuilderValidators.compose([
-              FormBuilderValidators.required(errorText: AppStrings.requiredField),
-              FormBuilderValidators.email(),
-            ]),
-            decoration: const InputDecoration(
-              hintText: 'Email',
-            ),
-          ),
+          const FormTextField(name: 'email', hintText: 'email'),
           gapH20,
-          FormBuilderTextField(
-            name: 'password',
-            validator: FormBuilderValidators.required(errorText: AppStrings.requiredField),
-            obscureText: true,
-            decoration: const InputDecoration(
-              hintText: 'Mot de passe',
-            ),
-          ),
+          const FormPasswordField(name: 'password', hintText: 'Mot de passe'),
           gapH32,
           FilledButton(
             onPressed: onLogin,
