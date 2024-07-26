@@ -15,8 +15,6 @@ class LoginController extends _$LoginController {
 
     state = const AsyncLoading();
 
-    state = await AsyncValue.guard(
-      () => Future.delayed(const Duration(milliseconds: 200)).then((_) => authRepository.login(request)),
-    );
+    state = await AsyncValue.guard(() => authRepository.login(request));
   }
 }
