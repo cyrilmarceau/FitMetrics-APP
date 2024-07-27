@@ -6,19 +6,18 @@ part of 'api_response_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ApiResponseModelImpl<T> _$$ApiResponseModelImplFromJson<T>(
+_$ApiResponseImpl<T> _$$ApiResponseImplFromJson<T>(
   Map<String, dynamic> json,
   T Function(Object? json) fromJsonT,
 ) =>
-    _$ApiResponseModelImpl<T>(
+    _$ApiResponseImpl<T>(
       success: json['success'] as bool,
-      messages:
-          ApiMessagesModel.fromJson(json['messages'] as Map<String, dynamic>),
+      messages: ApiMessages.fromJson(json['messages'] as Map<String, dynamic>),
       data: _$nullableGenericFromJson(json['data'], fromJsonT),
     );
 
-Map<String, dynamic> _$$ApiResponseModelImplToJson<T>(
-  _$ApiResponseModelImpl<T> instance,
+Map<String, dynamic> _$$ApiResponseImplToJson<T>(
+  _$ApiResponseImpl<T> instance,
   Object? Function(T value) toJsonT,
 ) =>
     <String, dynamic>{
@@ -39,20 +38,19 @@ Object? _$nullableGenericToJson<T>(
 ) =>
     input == null ? null : toJson(input);
 
-_$ApiMessagesModelImpl _$$ApiMessagesModelImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ApiMessagesModelImpl(
+_$ApiMessagesImpl _$$ApiMessagesImplFromJson(Map<String, dynamic> json) =>
+    _$ApiMessagesImpl(
       nonFieldSuccess: json['non_field_success'] as String?,
-      nonFieldErrors: (json['non_field_errors'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
       notificationContent: json['notification_content'] as String?,
+      nonFieldErrors: (json['non_field_errors'] as Map<String, dynamic>?)?.map(
+        (k, e) =>
+            MapEntry(k, (e as List<dynamic>).map((e) => e as String).toList()),
+      ),
     );
 
-Map<String, dynamic> _$$ApiMessagesModelImplToJson(
-        _$ApiMessagesModelImpl instance) =>
+Map<String, dynamic> _$$ApiMessagesImplToJson(_$ApiMessagesImpl instance) =>
     <String, dynamic>{
       'non_field_success': instance.nonFieldSuccess,
-      'non_field_errors': instance.nonFieldErrors,
       'notification_content': instance.notificationContent,
+      'non_field_errors': instance.nonFieldErrors,
     };

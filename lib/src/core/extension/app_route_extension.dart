@@ -11,6 +11,8 @@ extension AppPageExtension on AppPage {
         return '/onboarding';
       case AppPage.login:
         return '/login';
+      case AppPage.signup:
+        return '/signup';
       default:
         return '/login';
     }
@@ -28,6 +30,8 @@ extension AppPageExtension on AppPage {
         return 'ONBOARDING';
       case AppPage.login:
         return 'LOGIN';
+      case AppPage.signup:
+        return 'SIGNUP';
       default:
         return 'LOGIN';
     }
@@ -42,6 +46,8 @@ extension AppPageExtension on AppPage {
         return 'Onboarding';
       case AppPage.login:
         return 'Login';
+      case AppPage.signup:
+        return 'Signup';
       default:
         return 'Login';
     }

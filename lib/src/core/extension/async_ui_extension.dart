@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:fitmetrics/src/core/constants/constants.dart';
 import 'package:fitmetrics/src/core/error/exceptions.dart';
 import 'package:flutter/material.dart';
@@ -66,6 +64,7 @@ extension AsyncValueUI on AsyncValue<dynamic> {
               break;
 
             default:
+              logger.e('❌ [AsyncValueUI] :: showSnackBarOnErrorOrSuccess :: error => $error');
               _showError(
                 context: context,
                 title: const Text(AppStrings.anErrorOccurred, style: TextStyle(fontWeight: FontWeight.bold)),

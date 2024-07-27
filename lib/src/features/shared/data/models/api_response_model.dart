@@ -4,23 +4,23 @@ part 'api_response_model.freezed.dart';
 part 'api_response_model.g.dart';
 
 @Freezed(genericArgumentFactories: true)
-class ApiResponseModel<T> with _$ApiResponseModel<T> {
-  const factory ApiResponseModel({
+class ApiResponse<T> with _$ApiResponse<T> {
+  const factory ApiResponse({
     required bool success,
-    required ApiMessagesModel messages,
+    required ApiMessages messages,
     T? data,
-  }) = _ApiResponseModel<T>;
+  }) = _ApiResponse<T>;
 
-  factory ApiResponseModel.fromJson(Map<String, dynamic> json, T Function(Object?) fromJsonT) => _$ApiResponseModelFromJson(json, fromJsonT);
+  factory ApiResponse.fromJson(Map<String, dynamic> json, T Function(Object?) fromJsonT) => _$ApiResponseFromJson(json, fromJsonT);
 }
 
 @freezed
-class ApiMessagesModel with _$ApiMessagesModel {
-  const factory ApiMessagesModel({
-    @JsonKey(name: 'non_field_success', defaultValue: null) String? nonFieldSuccess,
-    @JsonKey(name: 'non_field_errors', defaultValue: null) List<String>? nonFieldErrors,
-    @JsonKey(name: 'notification_content', defaultValue: null) String? notificationContent,
-  }) = _ApiMessagesModel;
+class ApiMessages with _$ApiMessages {
+  const factory ApiMessages({
+    @JsonKey(name: 'non_field_success') String? nonFieldSuccess,
+    @JsonKey(name: 'notification_content') String? notificationContent,
+    @JsonKey(name: 'non_field_errors') Map<String, List<String>>? nonFieldErrors,
+  }) = _ApiMessages;
 
-  factory ApiMessagesModel.fromJson(Map<String, dynamic> json) => _$ApiMessagesModelFromJson(json);
+  factory ApiMessages.fromJson(Map<String, dynamic> json) => _$ApiMessagesFromJson(json);
 }

@@ -14,39 +14,39 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-ApiResponseModel<T> _$ApiResponseModelFromJson<T>(
+ApiResponse<T> _$ApiResponseFromJson<T>(
     Map<String, dynamic> json, T Function(Object?) fromJsonT) {
-  return _ApiResponseModel<T>.fromJson(json, fromJsonT);
+  return _ApiResponse<T>.fromJson(json, fromJsonT);
 }
 
 /// @nodoc
-mixin _$ApiResponseModel<T> {
+mixin _$ApiResponse<T> {
   bool get success => throw _privateConstructorUsedError;
-  ApiMessagesModel get messages => throw _privateConstructorUsedError;
+  ApiMessages get messages => throw _privateConstructorUsedError;
   T? get data => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson(Object? Function(T) toJsonT) =>
       throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ApiResponseModelCopyWith<T, ApiResponseModel<T>> get copyWith =>
+  $ApiResponseCopyWith<T, ApiResponse<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ApiResponseModelCopyWith<T, $Res> {
-  factory $ApiResponseModelCopyWith(
-          ApiResponseModel<T> value, $Res Function(ApiResponseModel<T>) then) =
-      _$ApiResponseModelCopyWithImpl<T, $Res, ApiResponseModel<T>>;
+abstract class $ApiResponseCopyWith<T, $Res> {
+  factory $ApiResponseCopyWith(
+          ApiResponse<T> value, $Res Function(ApiResponse<T>) then) =
+      _$ApiResponseCopyWithImpl<T, $Res, ApiResponse<T>>;
   @useResult
-  $Res call({bool success, ApiMessagesModel messages, T? data});
+  $Res call({bool success, ApiMessages messages, T? data});
 
-  $ApiMessagesModelCopyWith<$Res> get messages;
+  $ApiMessagesCopyWith<$Res> get messages;
 }
 
 /// @nodoc
-class _$ApiResponseModelCopyWithImpl<T, $Res, $Val extends ApiResponseModel<T>>
-    implements $ApiResponseModelCopyWith<T, $Res> {
-  _$ApiResponseModelCopyWithImpl(this._value, this._then);
+class _$ApiResponseCopyWithImpl<T, $Res, $Val extends ApiResponse<T>>
+    implements $ApiResponseCopyWith<T, $Res> {
+  _$ApiResponseCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -68,7 +68,7 @@ class _$ApiResponseModelCopyWithImpl<T, $Res, $Val extends ApiResponseModel<T>>
       messages: null == messages
           ? _value.messages
           : messages // ignore: cast_nullable_to_non_nullable
-              as ApiMessagesModel,
+              as ApiMessages,
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -78,33 +78,33 @@ class _$ApiResponseModelCopyWithImpl<T, $Res, $Val extends ApiResponseModel<T>>
 
   @override
   @pragma('vm:prefer-inline')
-  $ApiMessagesModelCopyWith<$Res> get messages {
-    return $ApiMessagesModelCopyWith<$Res>(_value.messages, (value) {
+  $ApiMessagesCopyWith<$Res> get messages {
+    return $ApiMessagesCopyWith<$Res>(_value.messages, (value) {
       return _then(_value.copyWith(messages: value) as $Val);
     });
   }
 }
 
 /// @nodoc
-abstract class _$$ApiResponseModelImplCopyWith<T, $Res>
-    implements $ApiResponseModelCopyWith<T, $Res> {
-  factory _$$ApiResponseModelImplCopyWith(_$ApiResponseModelImpl<T> value,
-          $Res Function(_$ApiResponseModelImpl<T>) then) =
-      __$$ApiResponseModelImplCopyWithImpl<T, $Res>;
+abstract class _$$ApiResponseImplCopyWith<T, $Res>
+    implements $ApiResponseCopyWith<T, $Res> {
+  factory _$$ApiResponseImplCopyWith(_$ApiResponseImpl<T> value,
+          $Res Function(_$ApiResponseImpl<T>) then) =
+      __$$ApiResponseImplCopyWithImpl<T, $Res>;
   @override
   @useResult
-  $Res call({bool success, ApiMessagesModel messages, T? data});
+  $Res call({bool success, ApiMessages messages, T? data});
 
   @override
-  $ApiMessagesModelCopyWith<$Res> get messages;
+  $ApiMessagesCopyWith<$Res> get messages;
 }
 
 /// @nodoc
-class __$$ApiResponseModelImplCopyWithImpl<T, $Res>
-    extends _$ApiResponseModelCopyWithImpl<T, $Res, _$ApiResponseModelImpl<T>>
-    implements _$$ApiResponseModelImplCopyWith<T, $Res> {
-  __$$ApiResponseModelImplCopyWithImpl(_$ApiResponseModelImpl<T> _value,
-      $Res Function(_$ApiResponseModelImpl<T>) _then)
+class __$$ApiResponseImplCopyWithImpl<T, $Res>
+    extends _$ApiResponseCopyWithImpl<T, $Res, _$ApiResponseImpl<T>>
+    implements _$$ApiResponseImplCopyWith<T, $Res> {
+  __$$ApiResponseImplCopyWithImpl(
+      _$ApiResponseImpl<T> _value, $Res Function(_$ApiResponseImpl<T>) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -114,7 +114,7 @@ class __$$ApiResponseModelImplCopyWithImpl<T, $Res>
     Object? messages = null,
     Object? data = freezed,
   }) {
-    return _then(_$ApiResponseModelImpl<T>(
+    return _then(_$ApiResponseImpl<T>(
       success: null == success
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
@@ -122,7 +122,7 @@ class __$$ApiResponseModelImplCopyWithImpl<T, $Res>
       messages: null == messages
           ? _value.messages
           : messages // ignore: cast_nullable_to_non_nullable
-              as ApiMessagesModel,
+              as ApiMessages,
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -133,31 +133,31 @@ class __$$ApiResponseModelImplCopyWithImpl<T, $Res>
 
 /// @nodoc
 @JsonSerializable(genericArgumentFactories: true)
-class _$ApiResponseModelImpl<T> implements _ApiResponseModel<T> {
-  const _$ApiResponseModelImpl(
+class _$ApiResponseImpl<T> implements _ApiResponse<T> {
+  const _$ApiResponseImpl(
       {required this.success, required this.messages, this.data});
 
-  factory _$ApiResponseModelImpl.fromJson(
+  factory _$ApiResponseImpl.fromJson(
           Map<String, dynamic> json, T Function(Object?) fromJsonT) =>
-      _$$ApiResponseModelImplFromJson(json, fromJsonT);
+      _$$ApiResponseImplFromJson(json, fromJsonT);
 
   @override
   final bool success;
   @override
-  final ApiMessagesModel messages;
+  final ApiMessages messages;
   @override
   final T? data;
 
   @override
   String toString() {
-    return 'ApiResponseModel<$T>(success: $success, messages: $messages, data: $data)';
+    return 'ApiResponse<$T>(success: $success, messages: $messages, data: $data)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ApiResponseModelImpl<T> &&
+            other is _$ApiResponseImpl<T> &&
             (identical(other.success, success) || other.success == success) &&
             (identical(other.messages, messages) ||
                 other.messages == messages) &&
@@ -172,76 +172,75 @@ class _$ApiResponseModelImpl<T> implements _ApiResponseModel<T> {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ApiResponseModelImplCopyWith<T, _$ApiResponseModelImpl<T>> get copyWith =>
-      __$$ApiResponseModelImplCopyWithImpl<T, _$ApiResponseModelImpl<T>>(
+  _$$ApiResponseImplCopyWith<T, _$ApiResponseImpl<T>> get copyWith =>
+      __$$ApiResponseImplCopyWithImpl<T, _$ApiResponseImpl<T>>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson(Object? Function(T) toJsonT) {
-    return _$$ApiResponseModelImplToJson<T>(this, toJsonT);
+    return _$$ApiResponseImplToJson<T>(this, toJsonT);
   }
 }
 
-abstract class _ApiResponseModel<T> implements ApiResponseModel<T> {
-  const factory _ApiResponseModel(
+abstract class _ApiResponse<T> implements ApiResponse<T> {
+  const factory _ApiResponse(
       {required final bool success,
-      required final ApiMessagesModel messages,
-      final T? data}) = _$ApiResponseModelImpl<T>;
+      required final ApiMessages messages,
+      final T? data}) = _$ApiResponseImpl<T>;
 
-  factory _ApiResponseModel.fromJson(
+  factory _ApiResponse.fromJson(
           Map<String, dynamic> json, T Function(Object?) fromJsonT) =
-      _$ApiResponseModelImpl<T>.fromJson;
+      _$ApiResponseImpl<T>.fromJson;
 
   @override
   bool get success;
   @override
-  ApiMessagesModel get messages;
+  ApiMessages get messages;
   @override
   T? get data;
   @override
   @JsonKey(ignore: true)
-  _$$ApiResponseModelImplCopyWith<T, _$ApiResponseModelImpl<T>> get copyWith =>
+  _$$ApiResponseImplCopyWith<T, _$ApiResponseImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
-ApiMessagesModel _$ApiMessagesModelFromJson(Map<String, dynamic> json) {
-  return _ApiMessagesModel.fromJson(json);
+ApiMessages _$ApiMessagesFromJson(Map<String, dynamic> json) {
+  return _ApiMessages.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ApiMessagesModel {
-  @JsonKey(name: 'non_field_success', defaultValue: null)
+mixin _$ApiMessages {
+  @JsonKey(name: 'non_field_success')
   String? get nonFieldSuccess => throw _privateConstructorUsedError;
-  @JsonKey(name: 'non_field_errors', defaultValue: null)
-  List<String>? get nonFieldErrors => throw _privateConstructorUsedError;
-  @JsonKey(name: 'notification_content', defaultValue: null)
+  @JsonKey(name: 'notification_content')
   String? get notificationContent => throw _privateConstructorUsedError;
+  @JsonKey(name: 'non_field_errors')
+  Map<String, List<String>>? get nonFieldErrors =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ApiMessagesModelCopyWith<ApiMessagesModel> get copyWith =>
+  $ApiMessagesCopyWith<ApiMessages> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ApiMessagesModelCopyWith<$Res> {
-  factory $ApiMessagesModelCopyWith(
-          ApiMessagesModel value, $Res Function(ApiMessagesModel) then) =
-      _$ApiMessagesModelCopyWithImpl<$Res, ApiMessagesModel>;
+abstract class $ApiMessagesCopyWith<$Res> {
+  factory $ApiMessagesCopyWith(
+          ApiMessages value, $Res Function(ApiMessages) then) =
+      _$ApiMessagesCopyWithImpl<$Res, ApiMessages>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'non_field_success', defaultValue: null)
-      String? nonFieldSuccess,
-      @JsonKey(name: 'non_field_errors', defaultValue: null)
-      List<String>? nonFieldErrors,
-      @JsonKey(name: 'notification_content', defaultValue: null)
-      String? notificationContent});
+      {@JsonKey(name: 'non_field_success') String? nonFieldSuccess,
+      @JsonKey(name: 'notification_content') String? notificationContent,
+      @JsonKey(name: 'non_field_errors')
+      Map<String, List<String>>? nonFieldErrors});
 }
 
 /// @nodoc
-class _$ApiMessagesModelCopyWithImpl<$Res, $Val extends ApiMessagesModel>
-    implements $ApiMessagesModelCopyWith<$Res> {
-  _$ApiMessagesModelCopyWithImpl(this._value, this._then);
+class _$ApiMessagesCopyWithImpl<$Res, $Val extends ApiMessages>
+    implements $ApiMessagesCopyWith<$Res> {
+  _$ApiMessagesCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -252,124 +251,119 @@ class _$ApiMessagesModelCopyWithImpl<$Res, $Val extends ApiMessagesModel>
   @override
   $Res call({
     Object? nonFieldSuccess = freezed,
-    Object? nonFieldErrors = freezed,
     Object? notificationContent = freezed,
+    Object? nonFieldErrors = freezed,
   }) {
     return _then(_value.copyWith(
       nonFieldSuccess: freezed == nonFieldSuccess
           ? _value.nonFieldSuccess
           : nonFieldSuccess // ignore: cast_nullable_to_non_nullable
               as String?,
-      nonFieldErrors: freezed == nonFieldErrors
-          ? _value.nonFieldErrors
-          : nonFieldErrors // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
       notificationContent: freezed == notificationContent
           ? _value.notificationContent
           : notificationContent // ignore: cast_nullable_to_non_nullable
               as String?,
+      nonFieldErrors: freezed == nonFieldErrors
+          ? _value.nonFieldErrors
+          : nonFieldErrors // ignore: cast_nullable_to_non_nullable
+              as Map<String, List<String>>?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$ApiMessagesModelImplCopyWith<$Res>
-    implements $ApiMessagesModelCopyWith<$Res> {
-  factory _$$ApiMessagesModelImplCopyWith(_$ApiMessagesModelImpl value,
-          $Res Function(_$ApiMessagesModelImpl) then) =
-      __$$ApiMessagesModelImplCopyWithImpl<$Res>;
+abstract class _$$ApiMessagesImplCopyWith<$Res>
+    implements $ApiMessagesCopyWith<$Res> {
+  factory _$$ApiMessagesImplCopyWith(
+          _$ApiMessagesImpl value, $Res Function(_$ApiMessagesImpl) then) =
+      __$$ApiMessagesImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'non_field_success', defaultValue: null)
-      String? nonFieldSuccess,
-      @JsonKey(name: 'non_field_errors', defaultValue: null)
-      List<String>? nonFieldErrors,
-      @JsonKey(name: 'notification_content', defaultValue: null)
-      String? notificationContent});
+      {@JsonKey(name: 'non_field_success') String? nonFieldSuccess,
+      @JsonKey(name: 'notification_content') String? notificationContent,
+      @JsonKey(name: 'non_field_errors')
+      Map<String, List<String>>? nonFieldErrors});
 }
 
 /// @nodoc
-class __$$ApiMessagesModelImplCopyWithImpl<$Res>
-    extends _$ApiMessagesModelCopyWithImpl<$Res, _$ApiMessagesModelImpl>
-    implements _$$ApiMessagesModelImplCopyWith<$Res> {
-  __$$ApiMessagesModelImplCopyWithImpl(_$ApiMessagesModelImpl _value,
-      $Res Function(_$ApiMessagesModelImpl) _then)
+class __$$ApiMessagesImplCopyWithImpl<$Res>
+    extends _$ApiMessagesCopyWithImpl<$Res, _$ApiMessagesImpl>
+    implements _$$ApiMessagesImplCopyWith<$Res> {
+  __$$ApiMessagesImplCopyWithImpl(
+      _$ApiMessagesImpl _value, $Res Function(_$ApiMessagesImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? nonFieldSuccess = freezed,
-    Object? nonFieldErrors = freezed,
     Object? notificationContent = freezed,
+    Object? nonFieldErrors = freezed,
   }) {
-    return _then(_$ApiMessagesModelImpl(
+    return _then(_$ApiMessagesImpl(
       nonFieldSuccess: freezed == nonFieldSuccess
           ? _value.nonFieldSuccess
           : nonFieldSuccess // ignore: cast_nullable_to_non_nullable
               as String?,
-      nonFieldErrors: freezed == nonFieldErrors
-          ? _value._nonFieldErrors
-          : nonFieldErrors // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
       notificationContent: freezed == notificationContent
           ? _value.notificationContent
           : notificationContent // ignore: cast_nullable_to_non_nullable
               as String?,
+      nonFieldErrors: freezed == nonFieldErrors
+          ? _value._nonFieldErrors
+          : nonFieldErrors // ignore: cast_nullable_to_non_nullable
+              as Map<String, List<String>>?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$ApiMessagesModelImpl implements _ApiMessagesModel {
-  const _$ApiMessagesModelImpl(
-      {@JsonKey(name: 'non_field_success', defaultValue: null)
-      this.nonFieldSuccess,
-      @JsonKey(name: 'non_field_errors', defaultValue: null)
-      final List<String>? nonFieldErrors,
-      @JsonKey(name: 'notification_content', defaultValue: null)
-      this.notificationContent})
+class _$ApiMessagesImpl implements _ApiMessages {
+  const _$ApiMessagesImpl(
+      {@JsonKey(name: 'non_field_success') this.nonFieldSuccess,
+      @JsonKey(name: 'notification_content') this.notificationContent,
+      @JsonKey(name: 'non_field_errors')
+      final Map<String, List<String>>? nonFieldErrors})
       : _nonFieldErrors = nonFieldErrors;
 
-  factory _$ApiMessagesModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ApiMessagesModelImplFromJson(json);
+  factory _$ApiMessagesImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ApiMessagesImplFromJson(json);
 
   @override
-  @JsonKey(name: 'non_field_success', defaultValue: null)
+  @JsonKey(name: 'non_field_success')
   final String? nonFieldSuccess;
-  final List<String>? _nonFieldErrors;
   @override
-  @JsonKey(name: 'non_field_errors', defaultValue: null)
-  List<String>? get nonFieldErrors {
+  @JsonKey(name: 'notification_content')
+  final String? notificationContent;
+  final Map<String, List<String>>? _nonFieldErrors;
+  @override
+  @JsonKey(name: 'non_field_errors')
+  Map<String, List<String>>? get nonFieldErrors {
     final value = _nonFieldErrors;
     if (value == null) return null;
-    if (_nonFieldErrors is EqualUnmodifiableListView) return _nonFieldErrors;
+    if (_nonFieldErrors is EqualUnmodifiableMapView) return _nonFieldErrors;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableMapView(value);
   }
 
   @override
-  @JsonKey(name: 'notification_content', defaultValue: null)
-  final String? notificationContent;
-
-  @override
   String toString() {
-    return 'ApiMessagesModel(nonFieldSuccess: $nonFieldSuccess, nonFieldErrors: $nonFieldErrors, notificationContent: $notificationContent)';
+    return 'ApiMessages(nonFieldSuccess: $nonFieldSuccess, notificationContent: $notificationContent, nonFieldErrors: $nonFieldErrors)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ApiMessagesModelImpl &&
+            other is _$ApiMessagesImpl &&
             (identical(other.nonFieldSuccess, nonFieldSuccess) ||
                 other.nonFieldSuccess == nonFieldSuccess) &&
-            const DeepCollectionEquality()
-                .equals(other._nonFieldErrors, _nonFieldErrors) &&
             (identical(other.notificationContent, notificationContent) ||
-                other.notificationContent == notificationContent));
+                other.notificationContent == notificationContent) &&
+            const DeepCollectionEquality()
+                .equals(other._nonFieldErrors, _nonFieldErrors));
   }
 
   @JsonKey(ignore: true)
@@ -377,47 +371,44 @@ class _$ApiMessagesModelImpl implements _ApiMessagesModel {
   int get hashCode => Object.hash(
       runtimeType,
       nonFieldSuccess,
-      const DeepCollectionEquality().hash(_nonFieldErrors),
-      notificationContent);
+      notificationContent,
+      const DeepCollectionEquality().hash(_nonFieldErrors));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ApiMessagesModelImplCopyWith<_$ApiMessagesModelImpl> get copyWith =>
-      __$$ApiMessagesModelImplCopyWithImpl<_$ApiMessagesModelImpl>(
-          this, _$identity);
+  _$$ApiMessagesImplCopyWith<_$ApiMessagesImpl> get copyWith =>
+      __$$ApiMessagesImplCopyWithImpl<_$ApiMessagesImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ApiMessagesModelImplToJson(
+    return _$$ApiMessagesImplToJson(
       this,
     );
   }
 }
 
-abstract class _ApiMessagesModel implements ApiMessagesModel {
-  const factory _ApiMessagesModel(
-      {@JsonKey(name: 'non_field_success', defaultValue: null)
-      final String? nonFieldSuccess,
-      @JsonKey(name: 'non_field_errors', defaultValue: null)
-      final List<String>? nonFieldErrors,
-      @JsonKey(name: 'notification_content', defaultValue: null)
-      final String? notificationContent}) = _$ApiMessagesModelImpl;
+abstract class _ApiMessages implements ApiMessages {
+  const factory _ApiMessages(
+      {@JsonKey(name: 'non_field_success') final String? nonFieldSuccess,
+      @JsonKey(name: 'notification_content') final String? notificationContent,
+      @JsonKey(name: 'non_field_errors')
+      final Map<String, List<String>>? nonFieldErrors}) = _$ApiMessagesImpl;
 
-  factory _ApiMessagesModel.fromJson(Map<String, dynamic> json) =
-      _$ApiMessagesModelImpl.fromJson;
+  factory _ApiMessages.fromJson(Map<String, dynamic> json) =
+      _$ApiMessagesImpl.fromJson;
 
   @override
-  @JsonKey(name: 'non_field_success', defaultValue: null)
+  @JsonKey(name: 'non_field_success')
   String? get nonFieldSuccess;
   @override
-  @JsonKey(name: 'non_field_errors', defaultValue: null)
-  List<String>? get nonFieldErrors;
-  @override
-  @JsonKey(name: 'notification_content', defaultValue: null)
+  @JsonKey(name: 'notification_content')
   String? get notificationContent;
   @override
+  @JsonKey(name: 'non_field_errors')
+  Map<String, List<String>>? get nonFieldErrors;
+  @override
   @JsonKey(ignore: true)
-  _$$ApiMessagesModelImplCopyWith<_$ApiMessagesModelImpl> get copyWith =>
+  _$$ApiMessagesImplCopyWith<_$ApiMessagesImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

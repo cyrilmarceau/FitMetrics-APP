@@ -2,6 +2,7 @@ import 'package:fitmetrics/src/core/enums/app_page_enum.dart';
 import 'package:fitmetrics/src/core/extension/app_route_extension.dart';
 import 'package:fitmetrics/src/core/router/not_found_screen.dart';
 import 'package:fitmetrics/src/features/authentication/presentation/screens/login/login_screen.dart';
+import 'package:fitmetrics/src/features/authentication/presentation/screens/signup/signup_screen.dart';
 import 'package:fitmetrics/src/features/authentication/providers/auth_provider.dart';
 import 'package:fitmetrics/src/features/authentication/providers/auth_state.dart';
 import 'package:fitmetrics/src/features/onboarding/presentations/onboarding_screen.dart';
@@ -60,8 +61,10 @@ GoRouter goRouter(GoRouterRef ref) {
         }
       } else {
         if (path == AppPage.login.routePath || path == AppPage.signup.routePath) {
+          debugPrint('000');
           return null;
         } else {
+          debugPrint('111');
           return AppPage.login.routePath;
         }
       }
@@ -98,7 +101,16 @@ GoRouter goRouter(GoRouterRef ref) {
           transitionsBuilder: _buildFadeTransition,
           transitionDuration: transitionDuration,
         ),
-      )
+      ),
+      GoRoute(
+        path: AppPage.signup.routePath,
+        name: AppPage.signup.routeName,
+        pageBuilder: (context, state) => const CustomTransitionPage(
+          child: SignupScreen(),
+          transitionsBuilder: _buildFadeTransition,
+          transitionDuration: transitionDuration,
+        ),
+      ),
     ],
   );
 }

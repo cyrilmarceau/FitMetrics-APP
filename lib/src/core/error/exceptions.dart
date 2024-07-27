@@ -37,3 +37,21 @@ class LoginFailedException extends APIException {
   @override
   String toString() => 'LoginFailedException($statusCode, $messages, $data)';
 }
+
+class SignupFailedException extends APIException {
+  SignupFailedException({required this.messages, this.statusCode, this.data});
+  final int? statusCode;
+
+  @override
+  final dynamic messages;
+  final dynamic data;
+
+  @override
+  String get displayMessage => 'Signup failed.\n${toString()}';
+
+  @override
+  bool get canRetry => true;
+
+  @override
+  String toString() => 'SignupFailedException($statusCode, $messages, $data)';
+}
