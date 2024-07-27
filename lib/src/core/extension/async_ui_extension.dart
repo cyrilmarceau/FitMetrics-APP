@@ -61,7 +61,7 @@ extension AsyncValueUI on AsyncValue<dynamic> {
               _showError(
                 context: context,
                 title: Text(messages['notification_content'], style: const TextStyle(fontWeight: FontWeight.bold)),
-                description: Text(messages['non_field_error'][0]),
+                description: Text(messages['non_field_errors'][0]),
               );
               break;
 
