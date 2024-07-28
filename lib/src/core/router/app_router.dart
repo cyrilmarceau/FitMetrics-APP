@@ -5,6 +5,7 @@ import 'package:fitmetrics/src/features/authentication/presentation/screens/logi
 import 'package:fitmetrics/src/features/authentication/presentation/screens/signup/signup_screen.dart';
 import 'package:fitmetrics/src/features/authentication/providers/auth_provider.dart';
 import 'package:fitmetrics/src/features/authentication/providers/auth_state.dart';
+import 'package:fitmetrics/src/features/home/home_screen.dart';
 import 'package:fitmetrics/src/features/onboarding/presentations/onboarding_screen.dart';
 import 'package:fitmetrics/src/features/onboarding/providers/onboarding_provider.dart';
 import 'package:fitmetrics/src/features/startup/providers/app_startup.dart';
@@ -21,6 +22,17 @@ const transitionDuration = Duration(milliseconds: 200);
 
 @riverpod
 GoRouter goRouter(GoRouterRef ref) {
+  final listenable = ValueNotifier<bool?>(null);
+
+  ref.listen(
+    authControllerProvider,
+    (_, authState) => listenable.value = switch (authState.asData?.value) {
+      Authenticated() => true,
+      Unauthenticated() => false,
+      _ => false,
+    },
+  );
+
   // final logger = Logger(
   //   printer: PrettyPrinter(methodCount: 0),
   // );
@@ -31,6 +43,7 @@ GoRouter goRouter(GoRouterRef ref) {
   return GoRouter(
     initialLocation: AppPage.login.routePath,
     navigatorKey: _rootNavigatorKey,
+    refreshListenable: listenable,
     debugLogDiagnostics: true,
     redirect: (context, state) {
       if (appStartupState.isLoading || appStartupState.hasError) {
@@ -105,6 +118,15 @@ GoRouter goRouter(GoRouterRef ref) {
         name: AppPage.signup.routeName,
         pageBuilder: (context, state) => const CustomTransitionPage(
           child: SignupScreen(),
+          transitionsBuilder: _buildFadeTransition,
+          transitionDuration: transitionDuration,
+        ),
+      ),
+      GoRoute(
+        path: AppPage.home.routePath,
+        name: AppPage.home.routeName,
+        pageBuilder: (context, state) => const CustomTransitionPage(
+          child: HomeScreen(),
           transitionsBuilder: _buildFadeTransition,
           transitionDuration: transitionDuration,
         ),

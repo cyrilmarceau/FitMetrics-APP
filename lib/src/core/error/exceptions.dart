@@ -55,3 +55,21 @@ class SignupFailedException extends APIException {
   @override
   String toString() => 'SignupFailedException($statusCode, $messages, $data)';
 }
+
+class UserFetchMeException extends APIException {
+  UserFetchMeException({required this.messages, this.statusCode, this.data});
+  final int? statusCode;
+
+  @override
+  final dynamic messages;
+  final dynamic data;
+
+  @override
+  String get displayMessage => 'User fetch failed.\n${toString()}';
+
+  @override
+  bool get canRetry => true;
+
+  @override
+  String toString() => 'UserFetchMeException($statusCode, $messages, $data)';
+}

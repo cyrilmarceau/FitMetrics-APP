@@ -13,6 +13,8 @@ extension AppPageExtension on AppPage {
         return '/login';
       case AppPage.signup:
         return '/signup';
+      case AppPage.home:
+        return '/home';
       default:
         return '/login';
     }
@@ -32,6 +34,8 @@ extension AppPageExtension on AppPage {
         return 'LOGIN';
       case AppPage.signup:
         return 'SIGNUP';
+      case AppPage.home:
+        return 'HOME';
       default:
         return 'LOGIN';
     }
@@ -48,6 +52,8 @@ extension AppPageExtension on AppPage {
         return 'Login';
       case AppPage.signup:
         return 'Signup';
+      case AppPage.home:
+        return 'Home';
       default:
         return 'Login';
     }
