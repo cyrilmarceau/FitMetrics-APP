@@ -7,6 +7,7 @@ part 'signup_request_model.g.dart';
 ///
 @freezed
 class SignupRequestModel with _$SignupRequestModel {
+  @JsonSerializable(fieldRename: FieldRename.snake)
   const factory SignupRequestModel({
     required String email,
     required String firstname,

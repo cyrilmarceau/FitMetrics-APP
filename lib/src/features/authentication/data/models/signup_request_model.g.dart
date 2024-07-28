@@ -13,7 +13,7 @@ _$SignupRequestModelImpl _$$SignupRequestModelImplFromJson(
       firstname: json['firstname'] as String,
       lastname: json['lastname'] as String,
       password: json['password'] as String,
-      passwordConfirmation: json['passwordConfirmation'] as String,
+      passwordConfirmation: json['password_confirmation'] as String,
     );
 
 Map<String, dynamic> _$$SignupRequestModelImplToJson(
@@ -23,5 +23,5 @@ Map<String, dynamic> _$$SignupRequestModelImplToJson(
       'firstname': instance.firstname,
       'lastname': instance.lastname,
       'password': instance.password,
-      'passwordConfirmation': instance.passwordConfirmation,
+      'password_confirmation': instance.passwordConfirmation,
     };

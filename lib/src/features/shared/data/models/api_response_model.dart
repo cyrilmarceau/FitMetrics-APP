@@ -16,10 +16,11 @@ class ApiResponse<T> with _$ApiResponse<T> {
 
 @freezed
 class ApiMessages with _$ApiMessages {
+  @JsonSerializable(fieldRename: FieldRename.snake)
   const factory ApiMessages({
-    @JsonKey(name: 'non_field_success') String? nonFieldSuccess,
-    @JsonKey(name: 'notification_content') String? notificationContent,
-    @JsonKey(name: 'non_field_errors') Map<String, List<String>>? nonFieldErrors,
+    String? nonFieldSuccess,
+    String? notificationContent,
+    Map<String, List<String>>? nonFieldErrors,
   }) = _ApiMessages;
 
   factory ApiMessages.fromJson(Map<String, dynamic> json) => _$ApiMessagesFromJson(json);

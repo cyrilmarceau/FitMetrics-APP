@@ -1,7 +1,9 @@
 import 'package:fitmetrics/src/core/constants/constants.dart';
 import 'package:fitmetrics/src/core/extension/async_ui_extension.dart';
 import 'package:fitmetrics/src/features/authentication/data/models/login_model.dart';
+import 'package:fitmetrics/src/features/authentication/data/models/signup_request_model.dart';
 import 'package:fitmetrics/src/features/authentication/presentation/screens/login/login_controller.dart';
+import 'package:fitmetrics/src/features/authentication/presentation/screens/signup/signup_controller.dart';
 import 'package:fitmetrics/src/features/shared/widgets/circular_indicator.dart';
 import 'package:fitmetrics/src/features/shared/widgets/form/form_password_field.dart';
 import 'package:fitmetrics/src/features/shared/widgets/form/form_text_field.dart';
@@ -21,10 +23,21 @@ class _SignupFormState extends ConsumerState<SignupForm> {
 
   Future<void> _onLogin() async {
     _formKey.currentState?.saveAndValidate();
+    final firstname = _formKey.currentState?.fields['firstname']?.value as String;
+    final lastname = _formKey.currentState?.fields['lastname']?.value as String;
     final email = _formKey.currentState?.fields['email']?.value as String;
     final password = _formKey.currentState?.fields['password']?.value as String;
+    final passwordConfirmation = _formKey.currentState?.fields['password_confirmation']?.value as String;
 
-    ref.read(loginControllerProvider.notifier).login(request: LoginModel(email: email, password: password));
+    ref.read(signupControllerProvider.notifier).signup(
+          request: SignupRequestModel(
+            firstname: firstname,
+            lastname: lastname,
+            email: email,
+            password: password,
+            passwordConfirmation: passwordConfirmation,
+          ),
+        );
   }
 
   @override

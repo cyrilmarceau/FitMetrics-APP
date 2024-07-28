@@ -149,7 +149,8 @@ class __$$SignupRequestModelImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(fieldRename: FieldRename.snake)
 class _$SignupRequestModelImpl implements _SignupRequestModel {
   const _$SignupRequestModelImpl(
       {required this.email,

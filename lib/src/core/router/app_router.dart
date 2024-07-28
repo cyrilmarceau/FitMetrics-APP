@@ -61,10 +61,8 @@ GoRouter goRouter(GoRouterRef ref) {
         }
       } else {
         if (path == AppPage.login.routePath || path == AppPage.signup.routePath) {
-          debugPrint('000');
           return null;
         } else {
-          debugPrint('111');
           return AppPage.login.routePath;
         }
       }

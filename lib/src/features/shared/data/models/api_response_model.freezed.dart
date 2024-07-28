@@ -210,11 +210,8 @@ ApiMessages _$ApiMessagesFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ApiMessages {
-  @JsonKey(name: 'non_field_success')
   String? get nonFieldSuccess => throw _privateConstructorUsedError;
-  @JsonKey(name: 'notification_content')
   String? get notificationContent => throw _privateConstructorUsedError;
-  @JsonKey(name: 'non_field_errors')
   Map<String, List<String>>? get nonFieldErrors =>
       throw _privateConstructorUsedError;
 
@@ -231,9 +228,8 @@ abstract class $ApiMessagesCopyWith<$Res> {
       _$ApiMessagesCopyWithImpl<$Res, ApiMessages>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'non_field_success') String? nonFieldSuccess,
-      @JsonKey(name: 'notification_content') String? notificationContent,
-      @JsonKey(name: 'non_field_errors')
+      {String? nonFieldSuccess,
+      String? notificationContent,
       Map<String, List<String>>? nonFieldErrors});
 }
 
@@ -280,9 +276,8 @@ abstract class _$$ApiMessagesImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'non_field_success') String? nonFieldSuccess,
-      @JsonKey(name: 'notification_content') String? notificationContent,
-      @JsonKey(name: 'non_field_errors')
+      {String? nonFieldSuccess,
+      String? notificationContent,
       Map<String, List<String>>? nonFieldErrors});
 }
 
@@ -319,12 +314,12 @@ class __$$ApiMessagesImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(fieldRename: FieldRename.snake)
 class _$ApiMessagesImpl implements _ApiMessages {
   const _$ApiMessagesImpl(
-      {@JsonKey(name: 'non_field_success') this.nonFieldSuccess,
-      @JsonKey(name: 'notification_content') this.notificationContent,
-      @JsonKey(name: 'non_field_errors')
+      {this.nonFieldSuccess,
+      this.notificationContent,
       final Map<String, List<String>>? nonFieldErrors})
       : _nonFieldErrors = nonFieldErrors;
 
@@ -332,14 +327,11 @@ class _$ApiMessagesImpl implements _ApiMessages {
       _$$ApiMessagesImplFromJson(json);
 
   @override
-  @JsonKey(name: 'non_field_success')
   final String? nonFieldSuccess;
   @override
-  @JsonKey(name: 'notification_content')
   final String? notificationContent;
   final Map<String, List<String>>? _nonFieldErrors;
   @override
-  @JsonKey(name: 'non_field_errors')
   Map<String, List<String>>? get nonFieldErrors {
     final value = _nonFieldErrors;
     if (value == null) return null;
@@ -390,22 +382,18 @@ class _$ApiMessagesImpl implements _ApiMessages {
 
 abstract class _ApiMessages implements ApiMessages {
   const factory _ApiMessages(
-      {@JsonKey(name: 'non_field_success') final String? nonFieldSuccess,
-      @JsonKey(name: 'notification_content') final String? notificationContent,
-      @JsonKey(name: 'non_field_errors')
+      {final String? nonFieldSuccess,
+      final String? notificationContent,
       final Map<String, List<String>>? nonFieldErrors}) = _$ApiMessagesImpl;
 
   factory _ApiMessages.fromJson(Map<String, dynamic> json) =
       _$ApiMessagesImpl.fromJson;
 
   @override
-  @JsonKey(name: 'non_field_success')
   String? get nonFieldSuccess;
   @override
-  @JsonKey(name: 'notification_content')
   String? get notificationContent;
   @override
-  @JsonKey(name: 'non_field_errors')
   Map<String, List<String>>? get nonFieldErrors;
   @override
   @JsonKey(ignore: true)
