@@ -11,6 +11,7 @@ _$ApiResponseImpl<T> _$$ApiResponseImplFromJson<T>(
   T Function(Object? json) fromJsonT,
 ) =>
     _$ApiResponseImpl<T>(
+      request: json['request'] as String,
       success: json['success'] as bool,
       messages: ApiMessages.fromJson(json['messages'] as Map<String, dynamic>),
       data: _$nullableGenericFromJson(json['data'], fromJsonT),
@@ -21,6 +22,7 @@ Map<String, dynamic> _$$ApiResponseImplToJson<T>(
   Object? Function(T value) toJsonT,
 ) =>
     <String, dynamic>{
+      'request': instance.request,
       'success': instance.success,
       'messages': instance.messages,
       'data': _$nullableGenericToJson(instance.data, toJsonT),
@@ -40,8 +42,8 @@ Object? _$nullableGenericToJson<T>(
 
 _$ApiMessagesImpl _$$ApiMessagesImplFromJson(Map<String, dynamic> json) =>
     _$ApiMessagesImpl(
-      nonFieldSuccess: json['non_field_success'] as String?,
       notificationContent: json['notification_content'] as String?,
+      nonFieldSuccess: json['non_field_success'] as String?,
       nonFieldErrors: (json['non_field_errors'] as Map<String, dynamic>?)?.map(
         (k, e) =>
             MapEntry(k, (e as List<dynamic>).map((e) => e as String).toList()),
@@ -50,7 +52,7 @@ _$ApiMessagesImpl _$$ApiMessagesImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$ApiMessagesImplToJson(_$ApiMessagesImpl instance) =>
     <String, dynamic>{
-      'non_field_success': instance.nonFieldSuccess,
       'notification_content': instance.notificationContent,
+      'non_field_success': instance.nonFieldSuccess,
       'non_field_errors': instance.nonFieldErrors,
     };

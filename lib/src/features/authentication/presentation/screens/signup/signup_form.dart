@@ -42,7 +42,9 @@ class _SignupFormState extends ConsumerState<SignupForm> {
 
   @override
   Widget build(BuildContext context) {
-    ref.listen(loginControllerProvider, (_, state) => state.showSnackBarOnErrorOrSuccess(context));
+    ref.listen(loginControllerProvider, (_, state) {
+      return state.showSnackBarOnErrorOrSuccess(context);
+    });
 
     return FormBuilder(
       initialValue: const {

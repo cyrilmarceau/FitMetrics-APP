@@ -38,6 +38,7 @@ class AuthRepositoryImpl with LoggingMixin implements AuthRepository {
         log.d('✅ [AuthRepositoryImpl] :: login :: payload.data => ${payload.data}');
 
         final response = ApiResponse<Token>(
+          request: 'login',
           success: payload.data['success'],
           messages: ApiMessages.fromJson(payload.data['messages']),
           data: Token.fromJson(payload.data['data']),
@@ -82,8 +83,9 @@ class AuthRepositoryImpl with LoggingMixin implements AuthRepository {
         log.d('✅ [AuthRepositoryImpl] :: register :: payload.data => ${payload.data['messages']}');
 
         final response = ApiResponse<User>(
+          request: 'signup',
           success: payload.data['success'],
-          messages: payload.data['messages'],
+          messages: ApiMessages.fromJson(payload.data['messages']),
           data: User.fromJson(payload.data['data']),
         );
 
@@ -92,9 +94,9 @@ class AuthRepositoryImpl with LoggingMixin implements AuthRepository {
         log.e('[AuthRepositoryImpl] :: register :: statusCode != HttpStatus.ok :: payload.data => ${payload.data}');
 
         throw SignupFailedException(
-          messages: payload.data['messages'],
+          messages: ApiMessages.fromJson(payload.data['messages']),
           statusCode: payload.statusCode,
-          data: null,
+          data: payload.data['data'],
         );
       }
     } on DioException catch (e) {

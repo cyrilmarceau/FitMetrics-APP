@@ -42,7 +42,7 @@ extension AsyncValueUI on AsyncValue<dynamic> {
           if (isLoading || !hasError) return;
           final logger = Logger(printer: PrettyPrinter(methodCount: 0));
 
-          // logger.e('❌ [AsyncValueUI] :: showSnackBarOnErrorOrSuccess :: error => $error');
+          logger.e('[AsyncValueUI] :: showSnackBarOnErrorOrSuccess :: error => $error');
 
           switch (error) {
             // ignore: unused_local_variable
@@ -55,16 +55,25 @@ extension AsyncValueUI on AsyncValue<dynamic> {
               break;
             // ignore: unused_local_variable
             case LoginFailedException(:final messages, :final data, :final statusCode):
-              logger.e('❌ [AsyncValueUI] :: showSnackBarOnErrorOrSuccess :: LoginFailedException => $messages');
+              logger.e('[AsyncValueUI] :: showSnackBarOnErrorOrSuccess :: LoginFailedException => $messages');
               _showError(
                 context: context,
                 title: Text(messages['notification_content'], style: const TextStyle(fontWeight: FontWeight.bold)),
                 description: Text(messages['non_field_errors'][0]),
               );
               break;
+            // ignore: unused_local_variable
+            case SignupFailedException(:final messages, :final data, :final statusCode):
+              logger.e('[AsyncValueUI] :: showSnackBarOnErrorOrSuccess :: SignupFailedException => $data');
+              _showError(
+                context: context,
+                title: const Text(AppStrings.anErrorOccurred, style: TextStyle(fontWeight: FontWeight.bold)),
+                description: Text(data['email'][0]),
+              );
+              break;
 
             default:
-              logger.e('❌ [AsyncValueUI] :: showSnackBarOnErrorOrSuccess :: error => $error');
+              logger.e('[AsyncValueUI] :: showSnackBarOnErrorOrSuccess :: error => $error');
               _showError(
                 context: context,
                 title: const Text(AppStrings.anErrorOccurred, style: TextStyle(fontWeight: FontWeight.bold)),
