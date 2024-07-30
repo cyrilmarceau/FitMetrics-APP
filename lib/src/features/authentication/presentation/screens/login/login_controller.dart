@@ -1,4 +1,4 @@
-import 'package:fitmetrics/src/features/authentication/data/models/login_model.dart';
+import 'package:fitmetrics/src/features/authentication/data/models/login_request_model.dart';
 import 'package:fitmetrics/src/features/authentication/providers/auth_provider.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -10,7 +10,7 @@ class LoginController extends _$LoginController {
   @override
   FutureOr<void> build() async => null;
 
-  Future<void> login({required LoginModel request}) async {
+  Future<void> login({required LoginRequest request}) async {
     final authRepository = ref.read(authRepositoryProvider);
 
     state = const AsyncLoading();

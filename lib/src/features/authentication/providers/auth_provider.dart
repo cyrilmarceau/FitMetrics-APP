@@ -1,6 +1,7 @@
-import 'package:fitmetrics/src/features/authentication/data/repositories/local/local_jwt_storage_repository_impl.dart';
+import 'package:fitmetrics/src/features/authentication/data/repositories/local/local_token_storage_repository_impl.dart';
 import 'package:fitmetrics/src/features/authentication/data/repositories/remote/auth_repository_impl.dart';
 import 'package:fitmetrics/src/features/authentication/providers/auth_state.dart';
+import 'package:fitmetrics/src/features/user/providers/user_provider.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -24,7 +25,7 @@ class AuthController extends _$AuthController {
 FlutterSecureStorage flutterSecureStorage(FlutterSecureStorageRef ref) => const FlutterSecureStorage();
 
 @riverpod
-LocalJwtStorageRepositoryImpl tokenStorageRepository(TokenStorageRepositoryRef ref) => LocalJwtStorageRepositoryImpl(
+LocalTokenStorageRepositoryImpl tokenStorageRepository(TokenStorageRepositoryRef ref) => LocalTokenStorageRepositoryImpl(
       storage: ref.read(flutterSecureStorageProvider),
     );
 
@@ -32,4 +33,5 @@ LocalJwtStorageRepositoryImpl tokenStorageRepository(TokenStorageRepositoryRef r
 AuthRepositoryImpl authRepository(AuthRepositoryRef ref) => AuthRepositoryImpl(
       ref: ref,
       tokenStorageRepository: ref.watch(tokenStorageRepositoryProvider),
+      userRepository: ref.read(userRepositoryProvider),
     );

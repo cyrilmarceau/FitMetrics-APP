@@ -24,12 +24,12 @@ final flutterSecureStorageProvider =
 
 typedef FlutterSecureStorageRef = AutoDisposeProviderRef<FlutterSecureStorage>;
 String _$tokenStorageRepositoryHash() =>
-    r'b7e966c0dbc92ea08f0d5cd013ce14d88dd1db2f';
+    r'd6022636b15c58ea2204a6a4a638051a89f87f93';
 
 /// See also [tokenStorageRepository].
 @ProviderFor(tokenStorageRepository)
 final tokenStorageRepositoryProvider =
-    AutoDisposeProvider<LocalJwtStorageRepositoryImpl>.internal(
+    AutoDisposeProvider<LocalTokenStorageRepositoryImpl>.internal(
   tokenStorageRepository,
   name: r'tokenStorageRepositoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -40,8 +40,8 @@ final tokenStorageRepositoryProvider =
 );
 
 typedef TokenStorageRepositoryRef
-    = AutoDisposeProviderRef<LocalJwtStorageRepositoryImpl>;
-String _$authRepositoryHash() => r'e22991e453d6b7150cd16a9089599e2a6b967ff5';
+    = AutoDisposeProviderRef<LocalTokenStorageRepositoryImpl>;
+String _$authRepositoryHash() => r'e643f50afb5e336421553c98cda4c19ecd2cc8a9';
 
 /// See also [authRepository].
 @ProviderFor(authRepository)

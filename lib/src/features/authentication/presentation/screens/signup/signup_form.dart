@@ -1,6 +1,5 @@
 import 'package:fitmetrics/src/core/constants/constants.dart';
 import 'package:fitmetrics/src/core/extension/async_ui_extension.dart';
-import 'package:fitmetrics/src/features/authentication/data/models/login_model.dart';
 import 'package:fitmetrics/src/features/authentication/data/models/signup_request_model.dart';
 import 'package:fitmetrics/src/features/authentication/presentation/screens/login/login_controller.dart';
 import 'package:fitmetrics/src/features/authentication/presentation/screens/signup/signup_controller.dart';
@@ -21,7 +20,7 @@ class SignupForm extends ConsumerStatefulWidget {
 class _SignupFormState extends ConsumerState<SignupForm> {
   final _formKey = GlobalKey<FormBuilderState>();
 
-  Future<void> _onLogin() async {
+  Future<void> _onSignup() async {
     _formKey.currentState?.saveAndValidate();
     final firstname = _formKey.currentState?.fields['firstname']?.value as String;
     final lastname = _formKey.currentState?.fields['lastname']?.value as String;
@@ -30,7 +29,7 @@ class _SignupFormState extends ConsumerState<SignupForm> {
     final passwordConfirmation = _formKey.currentState?.fields['password_confirmation']?.value as String;
 
     ref.read(signupControllerProvider.notifier).signup(
-          request: SignupRequestModel(
+          request: SignupRequest(
             firstname: firstname,
             lastname: lastname,
             email: email,
@@ -42,9 +41,7 @@ class _SignupFormState extends ConsumerState<SignupForm> {
 
   @override
   Widget build(BuildContext context) {
-    ref.listen(loginControllerProvider, (_, state) {
-      return state.showSnackBarOnErrorOrSuccess(context);
-    });
+    ref.listen(signupControllerProvider, (_, state) => state.showSnackBarOnErrorOrSuccess(context));
 
     return FormBuilder(
       initialValue: const {
@@ -71,7 +68,7 @@ class _SignupFormState extends ConsumerState<SignupForm> {
             builder: (context, ref, child) {
               final state = ref.watch(loginControllerProvider);
               return FilledButton(
-                onPressed: state is AsyncLoading ? null : _onLogin,
+                onPressed: state is AsyncLoading ? null : _onSignup,
                 style: ElevatedButton.styleFrom(
                   textStyle: const TextStyle(fontSize: 20),
                 ),

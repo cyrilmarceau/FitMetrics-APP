@@ -4,13 +4,13 @@ import 'package:dio/dio.dart';
 import 'package:fitmetrics/src/core/dio/dio_client.dart';
 import 'package:fitmetrics/src/core/error/exceptions.dart';
 import 'package:fitmetrics/src/core/mixins/logging_mixin.dart';
+import 'package:fitmetrics/src/features/authentication/data/models/login_request_model.dart';
+import 'package:fitmetrics/src/features/authentication/data/models/login_response_model.dart';
 import 'package:fitmetrics/src/features/authentication/data/models/signup_request_model.dart';
-import 'package:fitmetrics/src/features/shared/data/models/api_response_model.dart';
-import 'package:fitmetrics/src/features/authentication/data/models/login_model.dart';
-import 'package:fitmetrics/src/features/authentication/data/repositories/local/local_jwt_storage_repository_impl.dart';
-import 'package:fitmetrics/src/features/authentication/domain/entities/token.dart';
+import 'package:fitmetrics/src/features/authentication/data/models/signup_response_model.dart';
+import 'package:fitmetrics/src/features/authentication/data/repositories/local/local_token_storage_repository_impl.dart';
 import 'package:fitmetrics/src/features/authentication/providers/auth_provider.dart';
-import 'package:fitmetrics/src/features/user/domain/entities/user.dart';
+import 'package:fitmetrics/src/features/user/data/remote/user_repository_impl.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'auth_repository.dart';
@@ -19,14 +19,16 @@ class AuthRepositoryImpl with LoggingMixin implements AuthRepository {
   AuthRepositoryImpl({
     required this.ref,
     required this.tokenStorageRepository,
+    required this.userRepository,
   });
 
   Dio get dio => ref.read(dioProvider);
   final Ref ref;
-  final LocalJwtStorageRepositoryImpl tokenStorageRepository;
+  final LocalTokenStorageRepositoryImpl tokenStorageRepository;
+  final DioUserRepository userRepository;
 
   @override
-  Future<ApiResponse<Token>> login(LoginModel request) async {
+  Future<LoginResponse> login(LoginRequest request) async {
     try {
       final payload = await dio.post(
         '/auth/login',
@@ -37,25 +39,23 @@ class AuthRepositoryImpl with LoggingMixin implements AuthRepository {
       if (payload.statusCode == HttpStatus.ok) {
         log.d('✅ [AuthRepositoryImpl] :: login :: payload.data => ${payload.data}');
 
-        final response = ApiResponse<Token>(
-          request: 'login',
-          success: payload.data['success'],
-          messages: ApiMessages.fromJson(payload.data['messages']),
-          data: Token.fromJson(payload.data['data']),
-        );
+        final response = LoginResponse.fromJson(payload.data);
 
-        await tokenStorageRepository.save(response.data!);
+        await tokenStorageRepository.save(response.data);
 
         final authController = ref.read(authControllerProvider.notifier);
 
-        authController.authenticateUser();
+        await userRepository
+            .fetchMe()
+            .then((value) => authController.authenticateUser())
+            .onError((error, stackTrace) => log.e('[AuthRepositoryImpl] :: Error fetching user: $error'));
 
         return response;
       } else {
-        log.e('[AuthRepositoryImpl] :: login :: statusCode != HttpStatus.ok :: payload.data => ${payload.data['messages']}');
+        log.e('[AuthRepositoryImpl] :: login :: statusCode != HttpStatus.ok :: payload.data.messages => ${payload.data['messages']}');
 
         throw LoginFailedException(
-          messages: payload.data['messages'],
+          messages: LoginError.fromJson(payload.data['messages']),
           statusCode: payload.statusCode,
           data: null,
         );
@@ -71,7 +71,7 @@ class AuthRepositoryImpl with LoggingMixin implements AuthRepository {
   }
 
   @override
-  Future<ApiResponse<User>> signup(SignupRequestModel request) async {
+  Future<SignupResponse> signup(SignupRequest request) async {
     try {
       final payload = await dio.post(
         '/auth/signup',
@@ -82,19 +82,12 @@ class AuthRepositoryImpl with LoggingMixin implements AuthRepository {
       if (payload.statusCode == HttpStatus.ok) {
         log.d('✅ [AuthRepositoryImpl] :: register :: payload.data => ${payload.data['messages']}');
 
-        final response = ApiResponse<User>(
-          request: 'signup',
-          success: payload.data['success'],
-          messages: ApiMessages.fromJson(payload.data['messages']),
-          data: User.fromJson(payload.data['data']),
-        );
-
-        return response;
+        return SignupResponse.fromJson(payload.data);
       } else {
-        log.e('[AuthRepositoryImpl] :: register :: statusCode != HttpStatus.ok :: payload.data => ${payload.data}');
+        log.e('[AuthRepositoryImpl] :: register :: statusCode != HttpStatus.ok :: payload.data :: messages => ${payload.data['messages']}');
 
         throw SignupFailedException(
-          messages: ApiMessages.fromJson(payload.data['messages']),
+          messages: SignupFieldsError.fromJson(payload.data['messages']),
           statusCode: payload.statusCode,
           data: payload.data['data'],
         );

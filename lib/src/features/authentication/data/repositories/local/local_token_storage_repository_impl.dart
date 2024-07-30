@@ -1,16 +1,16 @@
 import 'dart:async';
 
 import 'package:fitmetrics/src/core/mixins/logging_mixin.dart';
-import 'package:fitmetrics/src/features/authentication/data/repositories/local/local_jwt_storage_repository.dart';
+import 'package:fitmetrics/src/features/authentication/data/repositories/local/local_token_storage_repository.dart';
 import 'package:fitmetrics/src/features/authentication/domain/entities/token.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-class LocalJwtStorageRepositoryImpl with LoggingMixin implements LocalJwtStorageRepository {
-  LocalJwtStorageRepositoryImpl({required this.storage});
+class LocalTokenStorageRepositoryImpl with LoggingMixin implements LocalTokenStorageRepository {
+  LocalTokenStorageRepositoryImpl({required this.storage});
 
   final FlutterSecureStorage storage;
 
-  static const _key = 'FITMETRICS__jwt_token';
+  static const _key = 'FITMETRICS__token';
 
   @override
   FutureOr<Token?> read() async {

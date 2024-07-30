@@ -39,7 +39,10 @@ extension AsyncValueUI on AsyncValue<dynamic> {
 
   void showSnackBarOnErrorOrSuccess(BuildContext context) => whenOrNull(
         error: (error, _) {
-          if (isLoading || !hasError) return;
+          if (isLoading) {
+            return;
+          }
+
           final logger = Logger(printer: PrettyPrinter(methodCount: 0));
 
           logger.e('[AsyncValueUI] :: showSnackBarOnErrorOrSuccess :: error => $error');
@@ -55,20 +58,18 @@ extension AsyncValueUI on AsyncValue<dynamic> {
               break;
             // ignore: unused_local_variable
             case LoginFailedException(:final messages, :final data, :final statusCode):
-              logger.e('[AsyncValueUI] :: showSnackBarOnErrorOrSuccess :: LoginFailedException => $messages');
               _showError(
                 context: context,
-                title: Text(messages['notification_content'], style: const TextStyle(fontWeight: FontWeight.bold)),
-                description: Text(messages['non_field_errors'][0]),
+                title: const Text(AppStrings.anErrorOccurred, style: TextStyle(fontWeight: FontWeight.bold)),
+                description: Text(messages.nonFieldErrors?.first ?? ''),
               );
               break;
             // ignore: unused_local_variable
             case SignupFailedException(:final messages, :final data, :final statusCode):
-              logger.e('[AsyncValueUI] :: showSnackBarOnErrorOrSuccess :: SignupFailedException => $data');
               _showError(
                 context: context,
                 title: const Text(AppStrings.anErrorOccurred, style: TextStyle(fontWeight: FontWeight.bold)),
-                description: Text(data['email'][0]),
+                description: Text(messages.email?.first ?? ''),
               );
               break;
 

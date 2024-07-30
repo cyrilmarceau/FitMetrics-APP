@@ -1,6 +1,5 @@
-import 'package:fitmetrics/src/features/shared/data/models/api_response_model.dart';
-import 'package:fitmetrics/src/features/user/domain/entities/user.dart';
+import 'package:fitmetrics/src/features/user/data/models/user_response_model.dart';
 
 abstract interface class UserRepository {
-  Future<ApiResponse<User>> fetchMe();
+  Future<UserResponse> fetchMe();
 }

@@ -1,6 +1,6 @@
 import 'package:fitmetrics/src/core/constants/constants.dart';
 import 'package:fitmetrics/src/core/extension/async_ui_extension.dart';
-import 'package:fitmetrics/src/features/authentication/data/models/login_model.dart';
+import 'package:fitmetrics/src/features/authentication/data/models/login_request_model.dart';
 import 'package:fitmetrics/src/features/authentication/presentation/screens/login/login_controller.dart';
 import 'package:fitmetrics/src/features/authentication/presentation/screens/signup/signup_controller.dart';
 import 'package:fitmetrics/src/features/shared/widgets/circular_indicator.dart';
@@ -25,12 +25,12 @@ class _LoginFormState extends ConsumerState<LoginForm> {
     final email = _formKey.currentState?.fields['email']?.value as String;
     final password = _formKey.currentState?.fields['password']?.value as String;
 
-    ref.read(loginControllerProvider.notifier).login(request: LoginModel(email: email, password: password));
+    ref.read(loginControllerProvider.notifier).login(request: LoginRequest(email: email, password: password));
   }
 
   @override
   Widget build(BuildContext context) {
-    ref.listen(signupControllerProvider, (_, state) => state.showSnackBarOnErrorOrSuccess(context));
+    ref.listen(loginControllerProvider, (_, state) => state.showSnackBarOnErrorOrSuccess(context));
 
     return FormBuilder(
       initialValue: const {

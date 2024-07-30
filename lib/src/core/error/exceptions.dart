@@ -1,3 +1,7 @@
+import 'package:fitmetrics/src/features/authentication/data/models/login_response_model.dart';
+import 'package:fitmetrics/src/features/authentication/data/models/signup_response_model.dart';
+import 'package:fitmetrics/src/features/user/data/models/user_response_model.dart';
+
 sealed class APIException implements Exception {
   dynamic get messages;
   String get displayMessage;
@@ -25,7 +29,7 @@ class LoginFailedException extends APIException {
   final int? statusCode;
 
   @override
-  final dynamic messages;
+  final LoginError messages;
   final dynamic data;
 
   @override
@@ -43,7 +47,7 @@ class SignupFailedException extends APIException {
   final int? statusCode;
 
   @override
-  final dynamic messages;
+  final SignupFieldsError messages;
   final dynamic data;
 
   @override
@@ -56,12 +60,12 @@ class SignupFailedException extends APIException {
   String toString() => 'SignupFailedException($statusCode, $messages, $data)';
 }
 
-class UserFetchMeException extends APIException {
-  UserFetchMeException({required this.messages, this.statusCode, this.data});
+class UserProfileException extends APIException {
+  UserProfileException({required this.messages, this.statusCode, this.data});
   final int? statusCode;
 
   @override
-  final dynamic messages;
+  final UserProfileError messages;
   final dynamic data;
 
   @override
@@ -71,5 +75,5 @@ class UserFetchMeException extends APIException {
   bool get canRetry => true;
 
   @override
-  String toString() => 'UserFetchMeException($statusCode, $messages, $data)';
+  String toString() => 'UserProfileException($statusCode, $messages, $data)';
 }
