@@ -5,11 +5,15 @@ import 'package:fitmetrics/src/features/authentication/presentation/screens/logi
 import 'package:fitmetrics/src/features/authentication/presentation/screens/signup/signup_screen.dart';
 import 'package:fitmetrics/src/features/authentication/providers/auth_provider.dart';
 import 'package:fitmetrics/src/features/authentication/providers/auth_state.dart';
-import 'package:fitmetrics/src/features/home/home_screen.dart';
+import 'package:fitmetrics/src/features/exercise/presentation/exercise_screen.dart';
+import 'package:fitmetrics/src/features/home/presentation/home_screen.dart';
+import 'package:fitmetrics/src/features/home/presentation/widgets/scaffold_with_nav_bar.dart';
 import 'package:fitmetrics/src/features/onboarding/presentations/onboarding_screen.dart';
 import 'package:fitmetrics/src/features/onboarding/providers/onboarding_provider.dart';
+import 'package:fitmetrics/src/features/settings/presentation/settings_screen.dart';
 import 'package:fitmetrics/src/features/startup/providers/app_startup.dart';
 import 'package:fitmetrics/src/features/startup/widgets/app_startup_screen.dart';
+import 'package:fitmetrics/src/features/workout/presentation/workout_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -17,6 +21,10 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'app_router.g.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
+final GlobalKey<NavigatorState> _sectionHomeNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'HomeNav');
+final GlobalKey<NavigatorState> _sectionExerciseNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'ExerciseNav');
+final GlobalKey<NavigatorState> _sectionWorkoutNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'WorkoutNav');
+final GlobalKey<NavigatorState> _sectionSettingsNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'SettingsNav');
 
 const transitionDuration = Duration(milliseconds: 200);
 
@@ -122,15 +130,67 @@ GoRouter goRouter(GoRouterRef ref) {
           transitionDuration: transitionDuration,
         ),
       ),
-      GoRoute(
-        path: AppPage.home.routePath,
-        name: AppPage.home.routeName,
-        pageBuilder: (context, state) => const CustomTransitionPage(
-          child: HomeScreen(),
-          transitionsBuilder: _buildFadeTransition,
-          transitionDuration: transitionDuration,
-        ),
-      ),
+      StatefulShellRoute.indexedStack(
+        builder: (BuildContext context, state, navigationShell) => ScaffoldWithNavBar(navigationShell: navigationShell),
+        branches: <StatefulShellBranch>[
+          StatefulShellBranch(
+            navigatorKey: _sectionHomeNavigatorKey,
+            routes: <RouteBase>[
+              GoRoute(
+                path: AppPage.home.routePath,
+                name: AppPage.home.routeName,
+                pageBuilder: (context, state) => const CustomTransitionPage(
+                  child: HomeScreen(),
+                  transitionsBuilder: _buildFadeTransition,
+                  transitionDuration: transitionDuration,
+                ),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            navigatorKey: _sectionExerciseNavigatorKey,
+            routes: <RouteBase>[
+              GoRoute(
+                path: AppPage.exercise.routePath,
+                name: AppPage.exercise.routeName,
+                pageBuilder: (context, state) => const CustomTransitionPage(
+                  child: ExerciseScreen(),
+                  transitionsBuilder: _buildFadeTransition,
+                  transitionDuration: transitionDuration,
+                ),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            navigatorKey: _sectionWorkoutNavigatorKey,
+            routes: <RouteBase>[
+              GoRoute(
+                path: AppPage.workout.routePath,
+                name: AppPage.workout.routeName,
+                pageBuilder: (context, state) => const CustomTransitionPage(
+                  child: WorkoutScreen(),
+                  transitionsBuilder: _buildFadeTransition,
+                  transitionDuration: transitionDuration,
+                ),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            navigatorKey: _sectionSettingsNavigatorKey,
+            routes: <RouteBase>[
+              GoRoute(
+                path: AppPage.settings.routePath,
+                name: AppPage.settings.routeName,
+                pageBuilder: (context, state) => const CustomTransitionPage(
+                  child: SettingsScreen(),
+                  transitionsBuilder: _buildFadeTransition,
+                  transitionDuration: transitionDuration,
+                ),
+              ),
+            ],
+          ),
+        ],
+      )
     ],
   );
 }

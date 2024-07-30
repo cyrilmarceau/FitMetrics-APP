@@ -9,12 +9,23 @@ extension AppPageExtension on AppPage {
         return '/startup';
       case AppPage.onboarding:
         return '/onboarding';
+
+      /// Authentication
       case AppPage.login:
         return '/login';
       case AppPage.signup:
         return '/signup';
+
+      /// Bottom navigation bar
       case AppPage.home:
         return '/home';
+      case AppPage.exercise:
+        return '/exercise';
+      case AppPage.workout:
+        return '/workout';
+      case AppPage.settings:
+        return '/settings';
+
       default:
         return '/login';
     }
@@ -30,12 +41,22 @@ extension AppPageExtension on AppPage {
         return 'STARTUP';
       case AppPage.onboarding:
         return 'ONBOARDING';
+
+      /// Authentication
       case AppPage.login:
         return 'LOGIN';
       case AppPage.signup:
         return 'SIGNUP';
+
+      /// Bottom navigation bar
       case AppPage.home:
         return 'HOME';
+      case AppPage.exercise:
+        return 'EXERCISE';
+      case AppPage.workout:
+        return 'WORKOUT';
+      case AppPage.settings:
+        return 'SETTINGS';
       default:
         return 'LOGIN';
     }
@@ -48,12 +69,22 @@ extension AppPageExtension on AppPage {
         return 'Startup';
       case AppPage.onboarding:
         return 'Onboarding';
+
+      /// Authentication
       case AppPage.login:
         return 'Login';
       case AppPage.signup:
         return 'Signup';
+
+      /// Bottom navigation bar
       case AppPage.home:
         return 'Home';
+      case AppPage.exercise:
+        return 'Exercise';
+      case AppPage.workout:
+        return 'Workout';
+      case AppPage.settings:
+        return 'Settings';
       default:
         return 'Login';
     }
