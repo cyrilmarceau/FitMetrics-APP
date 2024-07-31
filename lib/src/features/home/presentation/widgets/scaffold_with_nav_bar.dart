@@ -18,9 +18,10 @@ class ScaffoldWithNavBar extends StatelessWidget {
     return Scaffold(
       body: navigationShell,
       bottomNavigationBar: NavigationBar(
+        height: 65.0,
         elevation: 5.0,
         labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-        backgroundColor: const Color.fromRGBO(242, 242, 242, 1),
+        backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
         indicatorColor: Theme.of(context).colorScheme.primary,
         onDestinationSelected: (int index) => _onTap(context, index),
         destinations: [

@@ -5,7 +5,7 @@ import 'package:fitmetrics/src/features/authentication/presentation/screens/logi
 import 'package:fitmetrics/src/features/authentication/presentation/screens/signup/signup_screen.dart';
 import 'package:fitmetrics/src/features/authentication/providers/auth_provider.dart';
 import 'package:fitmetrics/src/features/authentication/providers/auth_state.dart';
-import 'package:fitmetrics/src/features/exercise/presentation/exercise_screen.dart';
+import 'package:fitmetrics/src/features/exercise/presentation/exercise_list/exercise_list_screen.dart';
 import 'package:fitmetrics/src/features/home/presentation/home_screen.dart';
 import 'package:fitmetrics/src/features/home/presentation/widgets/scaffold_with_nav_bar.dart';
 import 'package:fitmetrics/src/features/onboarding/presentations/onboarding_screen.dart';
@@ -154,7 +154,7 @@ GoRouter goRouter(GoRouterRef ref) {
                 path: AppPage.exercise.routePath,
                 name: AppPage.exercise.routeName,
                 pageBuilder: (context, state) => const CustomTransitionPage(
-                  child: ExerciseScreen(),
+                  child: ExerciseListScreen(),
                   transitionsBuilder: _buildFadeTransition,
                   transitionDuration: transitionDuration,
                 ),

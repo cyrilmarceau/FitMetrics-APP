@@ -1,5 +1,6 @@
 import 'package:fitmetrics/src/features/authentication/data/models/login_response_model.dart';
 import 'package:fitmetrics/src/features/authentication/data/models/signup_response_model.dart';
+import 'package:fitmetrics/src/features/exercise/data/models/exercise_response_model.dart';
 import 'package:fitmetrics/src/features/user/data/models/user_response_model.dart';
 
 sealed class APIException implements Exception {
@@ -76,4 +77,22 @@ class UserProfileException extends APIException {
 
   @override
   String toString() => 'UserProfileException($statusCode, $messages, $data)';
+}
+
+class ExerciseException extends APIException {
+  ExerciseException({required this.messages, this.statusCode, this.data});
+  final int? statusCode;
+
+  @override
+  final ExerciseError messages;
+  final dynamic data;
+
+  @override
+  String get displayMessage => 'Exercise fetch failed.\n${toString()}';
+
+  @override
+  bool get canRetry => true;
+
+  @override
+  String toString() => 'ExerciseException($statusCode, $messages, $data)';
 }
