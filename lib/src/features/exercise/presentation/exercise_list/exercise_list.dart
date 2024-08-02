@@ -42,15 +42,14 @@ class ExerciseListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      margin: const EdgeInsets.all(0),
-      child: ListTile(
-        title: Text(exercise.name, style: const TextStyle(fontWeight: FontWeight.bold)),
-        subtitle: Text(exercise.muscleGroups.map((e) => e.name).join(', ')),
-        trailing: const Icon(Icons.chevron_right),
-        onTap: onTap,
-      ),
+    return Column(
+      children: [
+        ListTile(
+          title: Text(exercise.name),
+          subtitle: Text(exercise.description ?? ''),
+          onTap: onTap,
+        ),
+      ],
     );
   }
 }

@@ -17,48 +17,59 @@ class ScaffoldWithNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: navigationShell,
-      bottomNavigationBar: NavigationBar(
-        height: 65.0,
-        elevation: 5.0,
-        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-        backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
-        indicatorColor: Theme.of(context).colorScheme.primary,
-        onDestinationSelected: (int index) => _onTap(context, index),
-        destinations: [
-          NavigationDestination(
-            icon: const Icon(Icons.home_outlined),
-            selectedIcon: const Icon(
-              Icons.home,
-              color: Colors.white,
+      bottomNavigationBar: Container(
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 10,
             ),
-            label: AppPage.home.routePageTitle,
-          ),
-          NavigationDestination(
-            icon: const Icon(Icons.fitness_center_outlined),
-            selectedIcon: const Icon(
-              Icons.fitness_center,
-              color: Colors.white,
+          ],
+        ),
+        child: NavigationBar(
+          height: 65.0,
+          elevation: 5.0,
+          labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+          backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
+          indicatorColor: Theme.of(context).colorScheme.primary,
+          onDestinationSelected: (int index) => _onTap(context, index),
+          destinations: [
+            NavigationDestination(
+              icon: const Icon(Icons.home_outlined),
+              selectedIcon: const Icon(
+                Icons.home,
+                color: Colors.white,
+              ),
+              label: AppPage.home.routePageTitle,
             ),
-            label: AppPage.exercise.routePageTitle,
-          ),
-          NavigationDestination(
-            icon: const Icon(Icons.calendar_today_outlined),
-            selectedIcon: const Icon(
-              Icons.calendar_today,
-              color: Colors.white,
+            NavigationDestination(
+              icon: const Icon(Icons.fitness_center_outlined),
+              selectedIcon: const Icon(
+                Icons.fitness_center,
+                color: Colors.white,
+              ),
+              label: AppPage.exercise.routePageTitle,
             ),
-            label: AppPage.workout.routePageTitle,
-          ),
-          NavigationDestination(
-            icon: const Icon(Icons.manage_accounts_outlined),
-            selectedIcon: const Icon(
-              Icons.manage_accounts,
-              color: Colors.white,
+            NavigationDestination(
+              icon: const Icon(Icons.calendar_today_outlined),
+              selectedIcon: const Icon(
+                Icons.calendar_today,
+                color: Colors.white,
+              ),
+              label: AppPage.workout.routePageTitle,
             ),
-            label: AppPage.settings.routePageTitle,
-          ),
-        ],
-        selectedIndex: navigationShell.currentIndex,
+            NavigationDestination(
+              icon: const Icon(Icons.manage_accounts_outlined),
+              selectedIcon: const Icon(
+                Icons.manage_accounts,
+                color: Colors.white,
+              ),
+              label: AppPage.settings.routePageTitle,
+            ),
+          ],
+          selectedIndex: navigationShell.currentIndex,
+        ),
       ),
     );
   }
