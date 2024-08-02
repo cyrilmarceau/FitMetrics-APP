@@ -10,21 +10,26 @@ class ExerciseList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final exercises = ref.watch(getExercisesProvider);
 
-    debugPrint('exercises: $exercises');
-
     return switch (exercises) {
-      AsyncLoading() => const Text('loading'),
+      AsyncLoading() => const SizedBox(
+          height: 100,
+          width: 100,
+          child: Center(
+            child: CircularProgressIndicator(),
+          ),
+        ),
       AsyncError(:final error) => Text('error: $error'),
-      AsyncData(:final value) => ListView.builder(
-          itemCount: 10, // Replace with actual number of exercises
-          itemBuilder: (context, index) {
-            return ExerciseListItem(
-              exercise: value.data[index],
-              onTap: () {
-                // Navigate to exercise details page
-              },
-            );
-          },
+      AsyncData(:final value) => RefreshIndicator(
+          child: ListView.builder(
+            itemCount: 10, // Replace with actual number of exercises
+            itemBuilder: (context, index) {
+              return ExerciseListItem(
+                exercise: value.data[index],
+                onTap: () {},
+              );
+            },
+          ),
+          onRefresh: () async => ref.refresh(getExercisesProvider.future),
         ),
       _ => const Text('unknown'),
     };
