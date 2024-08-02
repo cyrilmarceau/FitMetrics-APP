@@ -1,5 +1,7 @@
 import 'package:fitmetrics/src/features/exercise/domain/exercise.dart';
 import 'package:fitmetrics/src/features/exercise/providers/exercise_provider.dart';
+import 'package:fitmetrics/src/features/shared/widgets/circular_indicator.dart';
+import 'package:fitmetrics/src/features/shared/widgets/error.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -11,14 +13,10 @@ class ExerciseList extends ConsumerWidget {
     final exercises = ref.watch(getExercisesProvider);
 
     return switch (exercises) {
-      AsyncLoading() => const SizedBox(
-          height: 100,
-          width: 100,
-          child: Center(
-            child: CircularProgressIndicator(),
-          ),
+      AsyncLoading() => const CircularIndicator(),
+      AsyncError() => SharedErrorWidget(
+          onErrorCallback: () => ref.refresh(getExercisesProvider.future),
         ),
-      AsyncError(:final error) => Text('error: $error'),
       AsyncData(:final value) => RefreshIndicator(
           child: ListView.builder(
             itemCount: 10, // Replace with actual number of exercises
