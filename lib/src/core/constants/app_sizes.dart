@@ -40,3 +40,10 @@ const gapH48 = SizedBox(height: AppSizes.p48);
 const gapH64 = SizedBox(height: AppSizes.p64);
 
 const hPaddingScreen = EdgeInsets.symmetric(horizontal: AppSizes.p12);
+const vPaddingScreen = EdgeInsets.symmetric(vertical: AppSizes.p12);
+const paddingScreen = EdgeInsets.all(AppSizes.p12);
+
+const bottomSheetBorderRadius = BorderRadius.only(
+  topLeft: Radius.circular(AppSizes.p12),
+  topRight: Radius.circular(AppSizes.p12),
+);
