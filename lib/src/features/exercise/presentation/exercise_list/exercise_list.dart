@@ -1,4 +1,5 @@
 import 'package:fitmetrics/src/features/exercise/domain/exercise.dart';
+import 'package:fitmetrics/src/features/exercise/presentation/controller/exercise_filter_controller.dart';
 import 'package:fitmetrics/src/features/exercise/providers/exercise_provider.dart';
 import 'package:fitmetrics/src/features/shared/widgets/circular_indicator.dart';
 import 'package:fitmetrics/src/features/shared/widgets/error.dart';
@@ -10,12 +11,13 @@ class ExerciseList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final exercises = ref.watch(getExercisesProvider);
+    final exerciseFilter = ref.watch(exerciseFilterControllerProvider);
+    final exercises = ref.watch(getExercisesProvider(queryData: exerciseFilter));
 
     return switch (exercises) {
       AsyncLoading() => const CircularIndicator(),
       AsyncError() => SharedErrorWidget(
-          onErrorCallback: () => ref.refresh(getExercisesProvider.future),
+          onErrorCallback: () => ref.refresh(getExercisesProvider(queryData: exerciseFilter)),
         ),
       AsyncData(:final value) => RefreshIndicator(
           child: ListView.builder(
@@ -27,7 +29,7 @@ class ExerciseList extends ConsumerWidget {
               );
             },
           ),
-          onRefresh: () async => ref.refresh(getExercisesProvider.future),
+          onRefresh: () async => ref.refresh(getExercisesProvider(queryData: exerciseFilter).future),
         ),
       _ => const Text('unknown'),
     };

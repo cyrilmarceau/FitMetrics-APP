@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:fitmetrics/src/core/dio/dio_client.dart';
 import 'package:fitmetrics/src/core/error/exceptions.dart';
 import 'package:fitmetrics/src/core/mixins/logging_mixin.dart';
+import 'package:fitmetrics/src/core/typedef/typedef.dart';
 import 'package:fitmetrics/src/features/exercise/data/models/exercise_response_model.dart';
 import 'package:fitmetrics/src/features/exercise/data/repositories/remote/exercise_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,7 +18,7 @@ class ExerciseRepositoryImpl with LoggingMixin implements ExerciseRepository {
   final Ref ref;
 
   @override
-  Future<ExerciseResponse> getExercises() async {
+  Future<ExerciseResponse> getExercises({required ExerciseQueryData queryData}) async {
     try {
       final payload = await dio.get(
         '/exercises',
