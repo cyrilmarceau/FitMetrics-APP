@@ -1,6 +1,7 @@
 import 'package:fitmetrics/src/features/authentication/data/models/login_response_model.dart';
 import 'package:fitmetrics/src/features/authentication/data/models/signup_response_model.dart';
 import 'package:fitmetrics/src/features/exercise/data/models/exercise_response_model.dart';
+import 'package:fitmetrics/src/features/exercise/data/models/muscle_group_response_model.dart';
 import 'package:fitmetrics/src/features/user/data/models/user_response_model.dart';
 
 sealed class APIException implements Exception {
@@ -95,4 +96,22 @@ class ExerciseException extends APIException {
 
   @override
   String toString() => 'ExerciseException($statusCode, $messages, $data)';
+}
+
+class MuscleGroupException extends APIException {
+  MuscleGroupException({required this.messages, this.statusCode, this.data});
+  final int? statusCode;
+
+  @override
+  final MuscleGroupError messages;
+  final dynamic data;
+
+  @override
+  String get displayMessage => 'Muscle group fetch failed.\n${toString()}';
+
+  @override
+  bool get canRetry => true;
+
+  @override
+  String toString() => 'MuscleGroupException($statusCode, $messages, $data)';
 }

@@ -7,12 +7,11 @@ part of 'exercise_provider.dart';
 // **************************************************************************
 
 String _$exerciseRepositoryHash() =>
-    r'775c7b305051754f1bcc5d04c806256e184517d7';
+    r'defc75fa42bb977a0512479b8253b6f33f6f91c0';
 
 /// See also [exerciseRepository].
 @ProviderFor(exerciseRepository)
-final exerciseRepositoryProvider =
-    AutoDisposeProvider<ExerciseRepositoryImpl>.internal(
+final exerciseRepositoryProvider = Provider<ExerciseRepositoryImpl>.internal(
   exerciseRepository,
   name: r'exerciseRepositoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -22,8 +21,8 @@ final exerciseRepositoryProvider =
   allTransitiveDependencies: null,
 );
 
-typedef ExerciseRepositoryRef = AutoDisposeProviderRef<ExerciseRepositoryImpl>;
-String _$getExercisesHash() => r'f97bbaefcabc2cb8558bc8e3ad73517258072efa';
+typedef ExerciseRepositoryRef = ProviderRef<ExerciseRepositoryImpl>;
+String _$getExercisesHash() => r'6b13652760f10448dfca481282d4e9ce3be6f468';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -60,7 +59,7 @@ class GetExercisesFamily extends Family<AsyncValue<ExerciseResponse>> {
     required ({
       List<int>? muscleGroupIds,
       String? name,
-      ExerciseOwnerFilterEnum? ownerFilter
+      ExerciseOwnerFilterEnum ownerFilter
     }) queryData,
   }) {
     return GetExercisesProvider(
@@ -93,13 +92,13 @@ class GetExercisesFamily extends Family<AsyncValue<ExerciseResponse>> {
 }
 
 /// See also [getExercises].
-class GetExercisesProvider extends AutoDisposeFutureProvider<ExerciseResponse> {
+class GetExercisesProvider extends FutureProvider<ExerciseResponse> {
   /// See also [getExercises].
   GetExercisesProvider({
     required ({
       List<int>? muscleGroupIds,
       String? name,
-      ExerciseOwnerFilterEnum? ownerFilter
+      ExerciseOwnerFilterEnum ownerFilter
     }) queryData,
   }) : this._internal(
           (ref) => getExercises(
@@ -131,7 +130,7 @@ class GetExercisesProvider extends AutoDisposeFutureProvider<ExerciseResponse> {
   final ({
     List<int>? muscleGroupIds,
     String? name,
-    ExerciseOwnerFilterEnum? ownerFilter
+    ExerciseOwnerFilterEnum ownerFilter
   }) queryData;
 
   @override
@@ -153,7 +152,7 @@ class GetExercisesProvider extends AutoDisposeFutureProvider<ExerciseResponse> {
   }
 
   @override
-  AutoDisposeFutureProviderElement<ExerciseResponse> createElement() {
+  FutureProviderElement<ExerciseResponse> createElement() {
     return _GetExercisesProviderElement(this);
   }
 
@@ -171,26 +170,42 @@ class GetExercisesProvider extends AutoDisposeFutureProvider<ExerciseResponse> {
   }
 }
 
-mixin GetExercisesRef on AutoDisposeFutureProviderRef<ExerciseResponse> {
+mixin GetExercisesRef on FutureProviderRef<ExerciseResponse> {
   /// The parameter `queryData` of this provider.
   ({
     List<int>? muscleGroupIds,
     String? name,
-    ExerciseOwnerFilterEnum? ownerFilter
+    ExerciseOwnerFilterEnum ownerFilter
   }) get queryData;
 }
 
 class _GetExercisesProviderElement
-    extends AutoDisposeFutureProviderElement<ExerciseResponse>
-    with GetExercisesRef {
+    extends FutureProviderElement<ExerciseResponse> with GetExercisesRef {
   _GetExercisesProviderElement(super.provider);
 
   @override
   ({
     List<int>? muscleGroupIds,
     String? name,
-    ExerciseOwnerFilterEnum? ownerFilter
+    ExerciseOwnerFilterEnum ownerFilter
   }) get queryData => (origin as GetExercisesProvider).queryData;
 }
+
+String _$getMuscleGroupHash() => r'67653dd08363807bd07a1aa64596f7f1b342e1f9';
+
+/// See also [getMuscleGroup].
+@ProviderFor(getMuscleGroup)
+final getMuscleGroupProvider =
+    AutoDisposeFutureProvider<MuscleGroupResponse>.internal(
+  getMuscleGroup,
+  name: r'getMuscleGroupProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$getMuscleGroupHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef GetMuscleGroupRef = AutoDisposeFutureProviderRef<MuscleGroupResponse>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

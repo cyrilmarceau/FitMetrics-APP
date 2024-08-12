@@ -1,3 +1,4 @@
+import 'package:fitmetrics/src/features/exercise/providers/exercise_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -8,6 +9,8 @@ class MuscleGroupFilter extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final muscleGroups = ref.watch(getMuscleGroupProvider);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
@@ -20,16 +23,32 @@ class MuscleGroupFilter extends ConsumerWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          Wrap(
-            spacing: 5.0,
-            children: ExerciseFilter.values.map((ExerciseFilter exercise) {
-              return FilterChip(
-                label: Text(exercise.name),
-                selected: false,
-                onSelected: (bool selected) {},
+          muscleGroups.when(
+            loading: () => const CircularProgressIndicator(),
+            error: (error, stack) => Text('Error: $error'),
+            data: (muscleGroup) {
+              return Wrap(
+                spacing: 5.0,
+                children: muscleGroup.data.map((muscle) {
+                  return FilterChip(
+                    label: Text(muscle.name),
+                    selected: false,
+                    onSelected: (bool selected) {},
+                  );
+                }).toList(),
               );
-            }).toList(),
+            },
           ),
+          // Wrap(
+          //   spacing: 5.0,
+          //   children: ExerciseFilter.values.map((ExerciseFilter exercise) {
+          //     return FilterChip(
+          //       label: Text(exercise.name),
+          //       selected: false,
+          //       onSelected: (bool selected) {},
+          //     );
+          //   }).toList(),
+          // ),
           const Divider(),
         ],
       ),

@@ -1,13 +1,15 @@
+import 'package:fitmetrics/src/core/enums/exercise_filter_enum.dart';
+import 'package:fitmetrics/src/features/exercise/presentation/controller/exercise_filter_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-enum Owner { me, predefined, all }
 
 class MuscleGroupOwnerFilter extends ConsumerWidget {
   const MuscleGroupOwnerFilter({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final owner = ref.watch(ownerFilterControllerProvider);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
@@ -20,15 +22,15 @@ class MuscleGroupOwnerFilter extends ConsumerWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          SegmentedButton<Owner>(
-            segments: const <ButtonSegment<Owner>>[
-              ButtonSegment<Owner>(value: Owner.me, label: Text('Moi')),
-              ButtonSegment<Owner>(value: Owner.predefined, label: Text('Prédéfinit')),
-              ButtonSegment<Owner>(value: Owner.all, label: Text('Tous')),
+          SegmentedButton<ExerciseOwnerFilterEnum>(
+            segments: const <ButtonSegment<ExerciseOwnerFilterEnum>>[
+              ButtonSegment<ExerciseOwnerFilterEnum>(value: ExerciseOwnerFilterEnum.me, label: Text('Moi')),
+              ButtonSegment<ExerciseOwnerFilterEnum>(value: ExerciseOwnerFilterEnum.predefined, label: Text('Prédéfinit')),
+              ButtonSegment<ExerciseOwnerFilterEnum>(value: ExerciseOwnerFilterEnum.all, label: Text('Tous')),
             ],
-            selected: const <Owner>{Owner.me},
-            onSelectionChanged: (Set<Owner> newSelection) {
-              debugPrint('Selected: $newSelection');
+            selected: <ExerciseOwnerFilterEnum>{owner},
+            onSelectionChanged: (Set<ExerciseOwnerFilterEnum> newSelection) {
+              ref.read(ownerFilterControllerProvider.notifier).updateOwnerFilter(newSelection.first);
             },
           ),
           const Divider()

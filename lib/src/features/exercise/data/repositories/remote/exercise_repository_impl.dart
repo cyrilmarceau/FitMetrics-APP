@@ -6,6 +6,7 @@ import 'package:fitmetrics/src/core/error/exceptions.dart';
 import 'package:fitmetrics/src/core/mixins/logging_mixin.dart';
 import 'package:fitmetrics/src/core/typedef/typedef.dart';
 import 'package:fitmetrics/src/features/exercise/data/models/exercise_response_model.dart';
+import 'package:fitmetrics/src/features/exercise/data/models/muscle_group_response_model.dart';
 import 'package:fitmetrics/src/features/exercise/data/repositories/remote/exercise_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -34,6 +35,36 @@ class ExerciseRepositoryImpl with LoggingMixin implements ExerciseRepository {
 
         throw ExerciseException(
           messages: ExerciseError.fromJson(payload.data['messages']),
+          statusCode: payload.statusCode,
+        );
+      }
+    } on DioException catch (e) {
+      log.e('[AuthRepositoryImpl] :: login :: DioException => ${e.toString()}');
+
+      throw HttpException(
+        statusCode: e.response?.statusCode,
+        messages: e.message,
+      );
+    }
+  }
+
+  @override
+  Future<MuscleGroupResponse> getMuscleGroup() async {
+    try {
+      final payload = await dio.get(
+        '/muscle-group',
+        options: Options(extra: <String, bool>{'tokenRequired': true}),
+      );
+
+      if (payload.statusCode == HttpStatus.ok) {
+        log.d('✅ [ExerciseRepositoryImpl] :: getMuscleGroup :: payload.data => ${payload.data}');
+
+        return MuscleGroupResponse.fromJson(payload.data);
+      } else {
+        log.e('[ExerciseRepositoryImpl] :: getMuscleGroup :: statusCode != HttpStatus.ok :: payload.data.messages => ${payload.data['messages']}');
+
+        throw MuscleGroupException(
+          messages: MuscleGroupError.fromJson(payload.data['messages']),
           statusCode: payload.statusCode,
         );
       }
