@@ -30,11 +30,15 @@ class NameController extends _$NameController {
 @riverpod
 class MuscleGroupIdsController extends _$MuscleGroupIdsController {
   @override
-  List<int>? build() {
-    return null;
+  List<int> build() {
+    return [];
   }
 
-  void updateMuscleGroupIds(List<int> muscleGroupIds) {
-    state = muscleGroupIds;
+  void updateMuscleGroupIds(int muscleGroupIds) {
+    if (state.contains(muscleGroupIds)) {
+      state = [...state.where((element) => element != muscleGroupIds)];
+    } else {
+      state = [...state, muscleGroupIds];
+    }
   }
 }

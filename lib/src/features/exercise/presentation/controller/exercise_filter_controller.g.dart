@@ -40,12 +40,12 @@ final nameControllerProvider =
 
 typedef _$NameController = AutoDisposeNotifier<String?>;
 String _$muscleGroupIdsControllerHash() =>
-    r'51a96cd30a404ee1e45a2c063b1fb898c68159ce';
+    r'dab34837ae74bffd431d82cd2a3f35ea8b6970c2';
 
 /// See also [MuscleGroupIdsController].
 @ProviderFor(MuscleGroupIdsController)
 final muscleGroupIdsControllerProvider =
-    AutoDisposeNotifierProvider<MuscleGroupIdsController, List<int>?>.internal(
+    AutoDisposeNotifierProvider<MuscleGroupIdsController, List<int>>.internal(
   MuscleGroupIdsController.new,
   name: r'muscleGroupIdsControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -55,6 +55,6 @@ final muscleGroupIdsControllerProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$MuscleGroupIdsController = AutoDisposeNotifier<List<int>?>;
+typedef _$MuscleGroupIdsController = AutoDisposeNotifier<List<int>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

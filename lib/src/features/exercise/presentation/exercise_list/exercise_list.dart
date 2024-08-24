@@ -1,4 +1,5 @@
 import 'package:fitmetrics/src/core/enums/exercise_filter_enum.dart';
+import 'package:fitmetrics/src/core/mixins/logging_mixin.dart';
 import 'package:fitmetrics/src/features/exercise/domain/exercise.dart';
 import 'package:fitmetrics/src/features/exercise/presentation/controller/exercise_filter_controller.dart';
 import 'package:fitmetrics/src/features/exercise/providers/exercise_provider.dart';
@@ -7,7 +8,7 @@ import 'package:fitmetrics/src/features/shared/widgets/error.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ExerciseList extends ConsumerWidget {
+class ExerciseList extends ConsumerWidget with LoggingMixin {
   const ExerciseList({super.key});
 
   @override
@@ -15,13 +16,16 @@ class ExerciseList extends ConsumerWidget {
     final muscleGroupIDSFilter = ref.watch(muscleGroupIdsControllerProvider);
     final nameFilter = ref.watch(nameControllerProvider);
     final ownerFilter = ref.watch(ownerFilterControllerProvider);
+
+    log.d('muscleGroupIDSFilter: $muscleGroupIDSFilter');
+    log.d('nameFilter: $nameFilter');
+    log.d('ownerFilter: $ownerFilter');
+
     final exercises = ref.read(getExercisesProvider(queryData: (
       muscleGroupIds: null,
       name: null,
       ownerFilter: ExerciseOwnerFilterEnum.all,
     )));
-
-    debugPrint('exercises: $exercises');
 
     return switch (exercises) {
       AsyncLoading() => const CircularIndicator(),
@@ -60,7 +64,6 @@ class ExerciseListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('exercise: $exercise');
     return Column(
       children: [
         ListTile(

@@ -24,9 +24,18 @@ class MuscleGroupOwnerFilter extends ConsumerWidget {
           ),
           SegmentedButton<ExerciseOwnerFilterEnum>(
             segments: const <ButtonSegment<ExerciseOwnerFilterEnum>>[
-              ButtonSegment<ExerciseOwnerFilterEnum>(value: ExerciseOwnerFilterEnum.me, label: Text('Moi')),
-              ButtonSegment<ExerciseOwnerFilterEnum>(value: ExerciseOwnerFilterEnum.predefined, label: Text('Prédéfinit')),
-              ButtonSegment<ExerciseOwnerFilterEnum>(value: ExerciseOwnerFilterEnum.all, label: Text('Tous')),
+              ButtonSegment<ExerciseOwnerFilterEnum>(
+                value: ExerciseOwnerFilterEnum.me,
+                label: Text('Moi'),
+              ),
+              ButtonSegment<ExerciseOwnerFilterEnum>(
+                value: ExerciseOwnerFilterEnum.predefined,
+                label: Text('Défaut'),
+              ),
+              ButtonSegment<ExerciseOwnerFilterEnum>(
+                value: ExerciseOwnerFilterEnum.all,
+                label: Text('Tous'),
+              ),
             ],
             selected: <ExerciseOwnerFilterEnum>{owner},
             onSelectionChanged: (Set<ExerciseOwnerFilterEnum> newSelection) {

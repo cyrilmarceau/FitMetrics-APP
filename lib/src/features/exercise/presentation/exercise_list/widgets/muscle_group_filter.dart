@@ -1,15 +1,20 @@
+import 'package:fitmetrics/src/core/mixins/logging_mixin.dart';
+import 'package:fitmetrics/src/features/exercise/presentation/controller/exercise_filter_controller.dart';
 import 'package:fitmetrics/src/features/exercise/providers/exercise_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 enum ExerciseFilter { walking, running, cycling, hiking }
 
-class MuscleGroupFilter extends ConsumerWidget {
+class MuscleGroupFilter extends ConsumerWidget with LoggingMixin {
   const MuscleGroupFilter({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final muscleGroups = ref.watch(getMuscleGroupProvider);
+    final muscleGroupIDsFilter = ref.watch(muscleGroupIdsControllerProvider);
+
+    log.d('[MuscleGroupFilter]: muscleGroupFilterIDS $muscleGroupIDsFilter');
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -32,23 +37,15 @@ class MuscleGroupFilter extends ConsumerWidget {
                 children: muscleGroup.data.map((muscle) {
                   return FilterChip(
                     label: Text(muscle.name),
-                    selected: false,
-                    onSelected: (bool selected) {},
+                    selected: muscleGroupIDsFilter.contains(muscle.id),
+                    onSelected: (bool selected) {
+                      ref.read(muscleGroupIdsControllerProvider.notifier).updateMuscleGroupIds(muscle.id);
+                    },
                   );
                 }).toList(),
               );
             },
           ),
-          // Wrap(
-          //   spacing: 5.0,
-          //   children: ExerciseFilter.values.map((ExerciseFilter exercise) {
-          //     return FilterChip(
-          //       label: Text(exercise.name),
-          //       selected: false,
-          //       onSelected: (bool selected) {},
-          //     );
-          //   }).toList(),
-          // ),
           const Divider(),
         ],
       ),
