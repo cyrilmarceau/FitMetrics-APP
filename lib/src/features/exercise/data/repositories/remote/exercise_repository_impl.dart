@@ -27,8 +27,6 @@ class ExerciseRepositoryImpl with LoggingMixin implements ExerciseRepository {
       );
 
       if (payload.statusCode == HttpStatus.ok) {
-        log.d('✅ [ExerciseRepositoryImpl] :: getExercises :: payload.data => ${payload.data}');
-
         return ExerciseResponse.fromJson(payload.data);
       } else {
         log.e('[ExerciseRepositoryImpl] :: getExercises :: statusCode != HttpStatus.ok :: payload.data.messages => ${payload.data['messages']}');
@@ -57,8 +55,6 @@ class ExerciseRepositoryImpl with LoggingMixin implements ExerciseRepository {
       );
 
       if (payload.statusCode == HttpStatus.ok) {
-        log.d('✅ [ExerciseRepositoryImpl] :: getMuscleGroup :: payload.data => ${payload.data}');
-
         return MuscleGroupResponse.fromJson(payload.data);
       } else {
         log.e('[ExerciseRepositoryImpl] :: getMuscleGroup :: statusCode != HttpStatus.ok :: payload.data.messages => ${payload.data['messages']}');

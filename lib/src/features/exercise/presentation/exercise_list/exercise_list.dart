@@ -17,11 +17,7 @@ class ExerciseList extends ConsumerWidget with LoggingMixin {
     final nameFilter = ref.watch(nameControllerProvider);
     final ownerFilter = ref.watch(ownerFilterControllerProvider);
 
-    log.d('muscleGroupIDSFilter: $muscleGroupIDSFilter');
-    log.d('nameFilter: $nameFilter');
-    log.d('ownerFilter: $ownerFilter');
-
-    final exercises = ref.read(getExercisesProvider(queryData: (
+    final exercises = ref.watch(getExercisesProvider(queryData: (
       muscleGroupIds: null,
       name: null,
       ownerFilter: ExerciseOwnerFilterEnum.all,
@@ -67,9 +63,27 @@ class ExerciseListItem extends StatelessWidget {
     return Column(
       children: [
         ListTile(
-          title: Text(exercise.name),
-          subtitle: Text(exercise.description ?? ''),
+          leading: const Icon(Icons.fitness_center),
+          title: Text(
+            exercise.name,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          subtitle: Row(
+            children: exercise.muscleGroups
+                .map((e) => Container(
+                      margin: const EdgeInsets.only(right: 5),
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      decoration: BoxDecoration(border: Border.all(color: Colors.black54)),
+                      child: Text(e.name),
+                    ))
+                .toList(),
+          ),
           onTap: onTap,
+        ),
+        const Divider(
+          height: 0,
+          indent: 12,
+          endIndent: 12,
         ),
       ],
     );
