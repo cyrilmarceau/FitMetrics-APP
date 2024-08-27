@@ -64,19 +64,23 @@ class ExerciseListItem extends StatelessWidget {
       children: [
         ListTile(
           leading: const Icon(Icons.fitness_center),
+          dense: false,
           title: Text(
             exercise.name,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
           ),
           subtitle: Row(
-            children: exercise.muscleGroups
-                .map((e) => Container(
-                      margin: const EdgeInsets.only(right: 5),
-                      padding: const EdgeInsets.symmetric(horizontal: 5),
-                      decoration: BoxDecoration(border: Border.all(color: Colors.black54)),
-                      child: Text(e.name),
-                    ))
-                .toList(),
+            children: [
+              ...exercise.muscleGroups.map((e) => Container(
+                    margin: const EdgeInsets.only(right: 5),
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    decoration: BoxDecoration(border: Border.all(color: Colors.black54)),
+                    child: Text(
+                      e.name,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ))
+            ],
           ),
           onTap: onTap,
         ),
