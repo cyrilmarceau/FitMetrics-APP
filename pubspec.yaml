@@ -36,7 +36,7 @@ dependencies:
     cupertino_icons: ^1.0.6
     flutter_form_builder: ^9.4.1
     form_builder_validators: ^11.0.0
-    toastification: ^2.1.0
+    toastification: ^2.3.0
     json_serializable: ^6.8.0
     json_annotation: ^4.9.0
     logger: ^2.4.0
